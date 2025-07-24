@@ -128,7 +128,7 @@ const HeroSection = () => {
               
               <button 
                 className="btn-secondary"
-                onClick={() => scrollToSection('contact')}
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Get In Touch
               </button>
