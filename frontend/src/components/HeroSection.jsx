@@ -30,12 +30,15 @@ const HeroSection = () => {
           clearInterval(typeInterval);
           setTimeout(() => {
             // Clear text
-            const clearInterval = setInterval(() => {
-              setTypedText(prev => prev.slice(0, -1));
-              if (typedText === '') {
-                clearInterval(clearInterval);
-                setCurrentRole((prev) => (prev + 1) % roles.length);
-              }
+            const clearTextInterval = setInterval(() => {
+              setTypedText(prev => {
+                if (prev.length <= 1) {
+                  clearInterval(clearTextInterval);
+                  setCurrentRole((prevRole) => (prevRole + 1) % roles.length);
+                  return '';
+                }
+                return prev.slice(0, -1);
+              });
             }, 50);
           }, 2000);
         }
@@ -44,7 +47,7 @@ const HeroSection = () => {
 
     const timeout = setTimeout(typeText, 1000);
     return () => clearTimeout(timeout);
-  }, [currentRole]);
+  }, [currentRole, roles]);
 
   const scrollToAbout = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
