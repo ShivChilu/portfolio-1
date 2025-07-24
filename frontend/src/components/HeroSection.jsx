@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowDown, Code, Zap, Target, Users } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const HeroSection = () => {
   const [mounted, setMounted] = useState(false);
   const [typedText, setTypedText] = useState('');
+  const { isDark } = useTheme();
   
   const roles = [
     'Full Stack Developer',
@@ -84,9 +86,9 @@ const HeroSection = () => {
     <section id="hero" className="min-h-screen bg-pattern flex items-center justify-center relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-3/4 left-1/2 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className={`absolute top-1/4 left-1/4 w-64 h-64 ${isDark ? 'bg-blue-500/10' : 'bg-blue-500/20'} rounded-full blur-3xl animate-pulse`}></div>
+        <div className={`absolute bottom-1/4 right-1/4 w-96 h-96 ${isDark ? 'bg-purple-500/10' : 'bg-purple-500/20'} rounded-full blur-3xl animate-pulse`} style={{ animationDelay: '1s' }}></div>
+        <div className={`absolute top-3/4 left-1/2 w-48 h-48 ${isDark ? 'bg-cyan-500/10' : 'bg-cyan-500/20'} rounded-full blur-3xl animate-pulse`} style={{ animationDelay: '2s' }}></div>
       </div>
 
       <div className="container relative z-10">
@@ -98,18 +100,18 @@ const HeroSection = () => {
                 👋 Hello, I'm
               </p>
               
-              <h1 className="heading-xl text-white">
+              <h1 className="heading-xl">
                 Shiva <span className="gradient-text">Prasad</span>
               </h1>
               
               <div className="h-16 flex items-center">
-                <h2 className="heading-md text-white/80">
+                <h2 className="heading-md" style={{ color: 'var(--text-secondary)' }}>
                   {typedText}
                   <span className="inline-block w-1 h-8 bg-blue-400 ml-1 animate-pulse"></span>
                 </h2>
               </div>
               
-              <p className="body-lg text-white/70 max-w-2xl leading-relaxed">
+              <p className="body-lg max-w-2xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Computer Science student passionate about building 
                 <span className="text-blue-400 font-medium"> scalable web applications</span> and 
                 solving <span className="text-purple-400 font-medium">complex algorithmic challenges</span>. 
@@ -153,10 +155,10 @@ const HeroSection = () => {
                       <div className="heading-md gradient-text font-bold">
                         {stat.value}
                       </div>
-                      <div className="body-sm font-medium text-white">
+                      <div className="body-sm font-medium" style={{ color: 'var(--text-primary)' }}>
                         {stat.label}
                       </div>
-                      <div className="caption text-white/60">
+                      <div className="caption" style={{ color: 'var(--text-secondary)' }}>
                         {stat.description}
                       </div>
                     </div>
@@ -166,13 +168,13 @@ const HeroSection = () => {
             </div>
 
             {/* Floating Action Card */}
-            <div className="mt-8 glass-card text-center bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-2 border-white/20">
+            <div className="mt-8 glass-card text-center bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-2" style={{ borderColor: 'var(--border-hover)' }}>
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 text-green-400 rounded-full text-sm font-medium">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                   Available for Internships
                 </div>
-                <p className="body-sm text-white/80">
+                <p className="body-sm" style={{ color: 'var(--text-secondary)' }}>
                   Actively seeking <span className="font-semibold text-blue-400">Summer 2026</span> opportunities
                 </p>
               </div>
@@ -184,11 +186,12 @@ const HeroSection = () => {
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
           <button 
             onClick={scrollToAbout}
-            className="flex flex-col items-center space-y-2 text-white/60 hover:text-white transition-colors duration-300 group"
+            className="flex flex-col items-center space-y-2 hover:text-white transition-colors duration-300 group"
+            style={{ color: 'var(--text-secondary)' }}
           >
             <span className="caption">Scroll to explore</span>
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center group-hover:border-white/60 transition-colors duration-300">
-              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce group-hover:bg-white"></div>
+            <div className="w-6 h-10 border-2 rounded-full flex justify-center group-hover:border-white/60 transition-colors duration-300" style={{ borderColor: 'var(--border-color)' }}>
+              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce group-hover:bg-white" style={{ backgroundColor: 'var(--text-secondary)' }}></div>
             </div>
           </button>
         </div>

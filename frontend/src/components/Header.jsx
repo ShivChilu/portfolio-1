@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Download } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,9 +61,17 @@ const Header = () => {
               </button>
             ))}
             
-            <button className="btn-primary ml-4">
-              <Download size={16} />
-              Resume
+            {/* Theme Toggle */}
+            <button 
+              onClick={toggleTheme}
+              className="theme-toggle group"
+              aria-label="Toggle theme"
+            >
+              {isDark ? (
+                <Sun size={20} className="group-hover:rotate-12 transition-transform duration-300" />
+              ) : (
+                <Moon size={20} className="group-hover:-rotate-12 transition-transform duration-300" />
+              )}
             </button>
           </div>
 
@@ -89,10 +99,17 @@ const Header = () => {
                 {item.label}
               </button>
             ))}
-            <div className="px-6 pt-4">
-              <button className="btn-primary w-full">
-                <Download size={16} />
-                Download Resume
+            <div className="px-6 pt-4 flex justify-center">
+              <button 
+                onClick={toggleTheme}
+                className="theme-toggle group"
+                aria-label="Toggle theme"
+              >
+                {isDark ? (
+                  <Sun size={20} className="group-hover:rotate-12 transition-transform duration-300" />
+                ) : (
+                  <Moon size={20} className="group-hover:-rotate-12 transition-transform duration-300" />
+                )}
               </button>
             </div>
           </div>
