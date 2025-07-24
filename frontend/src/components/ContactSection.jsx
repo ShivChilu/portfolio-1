@@ -10,11 +10,12 @@ import {
   MessageCircle,
   Calendar
 } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const sectionRef = useRef(null);
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -86,31 +87,16 @@ const ContactSection = () => {
     }
   ];
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Mock form submission
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({ name: '', email: '', message: '' });
-  };
-
   return (
     <section 
       id="contact" 
       ref={sectionRef}
-      className="py-24 bg-gradient-to-br from-black to-gray-900/50 relative overflow-hidden"
+      className={`py-24 relative overflow-hidden ${isDark ? 'bg-gradient-to-br from-black to-gray-900/50' : 'bg-gradient-to-br from-gray-50 to-white'}`}
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className={`absolute top-1/4 left-1/4 w-96 h-96 ${isDark ? 'bg-blue-500/5' : 'bg-blue-500/10'} rounded-full blur-3xl animate-pulse`}></div>
+        <div className={`absolute bottom-1/4 right-1/4 w-72 h-72 ${isDark ? 'bg-purple-500/5' : 'bg-purple-500/10'} rounded-full blur-3xl animate-pulse`} style={{ animationDelay: '1s' }}></div>
       </div>
 
       <div className="container relative z-10">
@@ -120,10 +106,10 @@ const ContactSection = () => {
             <p className="caption text-cyan-400 mb-4 tracking-wider">
               GET IN TOUCH
             </p>
-            <h2 className="heading-lg text-white mb-6">
+            <h2 className="heading-lg mb-6">
               Let's <span className="gradient-text">Connect</span>
             </h2>
-            <p className="body-lg text-white/70 max-w-3xl mx-auto">
+            <p className="body-lg max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
               Ready to bring innovative ideas to life? I'm actively seeking Summer 2026 internship opportunities 
               and always excited to discuss new projects and collaborations.
             </p>
@@ -141,8 +127,8 @@ const ContactSection = () => {
                     </div>
                   </div>
                   <div>
-                    <h3 className="heading-sm text-white mb-2">Available for Opportunities</h3>
-                    <p className="body-sm text-white/80">
+                    <h3 className="heading-sm mb-2">Available for Opportunities</h3>
+                    <p className="body-sm" style={{ color: 'var(--text-secondary)' }}>
                       Actively seeking <span className="text-green-400 font-medium">Summer 2026</span> internship positions
                     </p>
                   </div>
@@ -151,7 +137,7 @@ const ContactSection = () => {
 
               {/* Contact Methods */}
               <div className="space-y-6">
-                <h3 className="heading-sm text-white">Contact Information</h3>
+                <h3 className="heading-sm">Contact Information</h3>
                 {contactInfo.map((contact, index) => (
                   <div 
                     key={index}
@@ -165,20 +151,21 @@ const ContactSection = () => {
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="body-sm font-medium text-white/80 mb-1">{contact.label}</p>
+                            <p className="body-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>{contact.label}</p>
                             {contact.href ? (
                               <a 
                                 href={contact.href}
-                                className="body-md text-white hover:text-blue-400 transition-colors duration-300 group-hover:underline"
+                                className="body-md hover:text-blue-400 transition-colors duration-300 group-hover:underline"
+                                style={{ color: 'var(--text-primary)' }}
                               >
                                 {contact.value}
                               </a>
                             ) : (
-                              <p className="body-md text-white">{contact.value}</p>
+                              <p className="body-md" style={{ color: 'var(--text-primary)' }}>{contact.value}</p>
                             )}
                           </div>
                           {contact.href && (
-                            <ExternalLink size={16} className="text-white/40 group-hover:text-white/80 transition-colors duration-300" />
+                            <ExternalLink size={16} className="group-hover:text-white/80 transition-colors duration-300" style={{ color: 'var(--text-muted)' }} />
                           )}
                         </div>
                       </div>
@@ -189,7 +176,7 @@ const ContactSection = () => {
 
               {/* Social Links */}
               <div className="space-y-6">
-                <h3 className="heading-sm text-white">Find Me Online</h3>
+                <h3 className="heading-sm">Find Me Online</h3>
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
@@ -206,14 +193,14 @@ const ContactSection = () => {
                         </div>
                         <div>
                           <div className="flex items-center gap-2 mb-1">
-                            <p className="body-md font-semibold text-white">{social.label}</p>
-                            <span className="caption text-white/60">{social.username}</span>
+                            <p className="body-md font-semibold" style={{ color: 'var(--text-primary)' }}>{social.label}</p>
+                            <span className="caption" style={{ color: 'var(--text-secondary)' }}>{social.username}</span>
                           </div>
-                          <p className="body-sm text-white/70">{social.value}</p>
-                          <p className="caption text-white/50">{social.stats}</p>
+                          <p className="body-sm" style={{ color: 'var(--text-secondary)' }}>{social.value}</p>
+                          <p className="caption" style={{ color: 'var(--text-muted)' }}>{social.stats}</p>
                         </div>
                       </div>
-                      <ExternalLink size={16} className="text-white/40 group-hover:text-white/80 group-hover:scale-110 transition-all duration-300" />
+                      <ExternalLink size={16} className="group-hover:scale-110 transition-all duration-300" style={{ color: 'var(--text-muted)' }} />
                     </div>
                   </a>
                 ))}
@@ -224,7 +211,7 @@ const ContactSection = () => {
             <div className={`space-y-8 ${isVisible ? 'animate-fadeInRight' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
               {/* Quick Contact Options */}
               <div className="glass-card">
-                <h3 className="heading-sm text-white mb-6">Quick Connect</h3>
+                <h3 className="heading-sm mb-6">Quick Connect</h3>
                 <div className="grid gap-4">
                   <a 
                     href="mailto:chiluverushivaprasad02@gmail.com"
@@ -255,22 +242,22 @@ const ContactSection = () => {
               </div>
 
               {/* Collaboration CTA */}
-              <div className="glass-card bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 border-2 border-white/20">
+              <div className="glass-card bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 border-2" style={{ borderColor: 'var(--border-hover)' }}>
                 <div className="text-center space-y-6">
                   <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center mx-auto">
                     <MessageCircle size={32} className="text-blue-400" />
                   </div>
                   
                   <div className="space-y-4">
-                    <h3 className="heading-sm text-white">Ready to Collaborate?</h3>
-                    <p className="body-md text-white/80 leading-relaxed">
+                    <h3 className="heading-sm">Ready to Collaborate?</h3>
+                    <p className="body-md leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                       Whether you're looking for a dedicated intern, have an exciting project in mind, 
                       or just want to discuss the latest in tech, I'd love to hear from you!
                     </p>
                   </div>
 
                   <div className="space-y-3">
-                    <div className="flex items-center justify-center gap-4 text-white/60">
+                    <div className="flex items-center justify-center gap-4" style={{ color: 'var(--text-secondary)' }}>
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                         <span className="caption">Usually responds within 24h</span>
@@ -282,23 +269,23 @@ const ContactSection = () => {
 
               {/* Achievement Highlight */}
               <div className="glass-card">
-                <h4 className="body-md font-semibold text-white mb-4">What I Bring to the Table</h4>
+                <h4 className="body-md font-semibold mb-4">What I Bring to the Table</h4>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                    <span className="body-sm text-white/80">150+ DSA problems solved with optimization focus</span>
+                    <span className="body-sm" style={{ color: 'var(--text-secondary)' }}>150+ DSA problems solved with optimization focus</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                    <span className="body-sm text-white/80">2 production-ready full-stack applications built</span>
+                    <span className="body-sm" style={{ color: 'var(--text-secondary)' }}>2 production-ready full-stack applications built</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <span className="body-sm text-white/80">Team leadership and collaborative development experience</span>
+                    <span className="body-sm" style={{ color: 'var(--text-secondary)' }}>Team leadership and collaborative development experience</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                    <span className="body-sm text-white/80">Passionate about learning and implementing new technologies</span>
+                    <span className="body-sm" style={{ color: 'var(--text-secondary)' }}>Passionate about learning and implementing new technologies</span>
                   </div>
                 </div>
               </div>

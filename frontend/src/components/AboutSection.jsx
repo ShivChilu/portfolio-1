@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Code2, Target, Users, Lightbulb, Rocket, Heart } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -64,7 +66,7 @@ const AboutSection = () => {
     <section 
       id="about" 
       ref={sectionRef}
-      className="py-24 bg-gradient-to-br from-gray-900/50 to-black/50 relative overflow-hidden"
+      className={`py-24 relative overflow-hidden ${isDark ? 'bg-gradient-to-br from-gray-900/50 to-black/50' : 'bg-gradient-to-br from-gray-50 to-white'}`}
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-pattern opacity-50"></div>
@@ -76,10 +78,10 @@ const AboutSection = () => {
             <p className="caption text-blue-400 mb-4 tracking-wider">
               GET TO KNOW ME
             </p>
-            <h2 className="heading-lg text-white mb-6">
+            <h2 className="heading-lg mb-6">
               About <span className="gradient-text">Me</span>
             </h2>
-            <p className="body-lg text-white/70 max-w-3xl mx-auto">
+            <p className="body-lg max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
               A passionate developer with a vision to build tomorrow's digital solutions
             </p>
           </div>
@@ -88,9 +90,9 @@ const AboutSection = () => {
             {/* Left: Personal Story */}
             <div className={`space-y-8 ${isVisible ? 'animate-fadeInLeft' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
               <div className="glass-card space-y-6">
-                <h3 className="heading-sm text-white">My Journey</h3>
+                <h3 className="heading-sm">My Journey</h3>
                 
-                <div className="space-y-4 text-white/80">
+                <div className="space-y-4" style={{ color: 'var(--text-secondary)' }}>
                   <p className="body-md leading-relaxed">
                     I'm a <span className="text-blue-400 font-semibold">Computer Science student</span> graduating in 2027, 
                     with hands-on experience in scalable full-stack development, distributed systems, and 
@@ -113,10 +115,15 @@ const AboutSection = () => {
                   {personalTraits.map((item, index) => (
                     <div 
                       key={index}
-                      className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105"
+                      className="flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 hover:scale-105"
+                      style={{ 
+                        backgroundColor: 'var(--bg-glass)', 
+                        borderColor: 'var(--border-color)',
+                        color: 'var(--text-primary)'
+                      }}
                     >
                       <span className={item.color}>{item.icon}</span>
-                      <span className="text-white text-sm font-medium">{item.trait}</span>
+                      <span className="text-sm font-medium">{item.trait}</span>
                     </div>
                   ))}
                 </div>
@@ -142,10 +149,10 @@ const AboutSection = () => {
                     </div>
                     
                     <div className="flex-1 space-y-3">
-                      <h4 className="heading-sm text-white group-hover:text-blue-400 transition-colors duration-300">
+                      <h4 className="heading-sm group-hover:text-blue-400 transition-colors duration-300">
                         {highlight.title}
                       </h4>
-                      <p className="body-sm text-white/70 leading-relaxed">
+                      <p className="body-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                         {highlight.description}
                       </p>
                     </div>
@@ -157,19 +164,25 @@ const AboutSection = () => {
 
           {/* Bottom CTA Section */}
           <div className={`mt-16 text-center ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
-            <div className="glass-card max-w-4xl mx-auto bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 border-2 border-white/20">
+            <div className="glass-card max-w-4xl mx-auto bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 border-2" style={{ borderColor: 'var(--border-hover)' }}>
               <div className="space-y-6">
-                <h3 className="heading-sm text-white">Ready to Build Something Amazing?</h3>
-                <p className="body-md text-white/80 max-w-2xl mx-auto">
+                <h3 className="heading-sm">Ready to Build Something Amazing?</h3>
+                <p className="body-md max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
                   I'm always excited to discuss new opportunities, innovative projects, or just chat about the latest in tech. 
                   Let's create something extraordinary together!
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button className="btn-primary">
+                  <button 
+                    className="btn-primary"
+                    onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
                     View My Projects
                   </button>
-                  <button className="btn-secondary">
-                    Download Resume
+                  <button 
+                    className="btn-secondary"
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    Get In Touch
                   </button>
                 </div>
               </div>
