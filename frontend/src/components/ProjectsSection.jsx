@@ -67,7 +67,7 @@ const ProjectsSection = () => {
         "Boosted average farmer profits by 20% through integrated dashboards",
         "Achieved 9/10 satisfaction rating from local stakeholders",
         "Improved decision-making speed by 30% among users",
-        "Successfully deployed with 99.5% uptime"
+        "Successfully deployed"
       ],
       stats: {
         farmers: { value: "100+", label: "Active Farmers", icon: <Users size={16} /> },
