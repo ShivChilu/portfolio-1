@@ -11,6 +11,13 @@ import uuid
 from datetime import datetime
 
 
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"message": "FastAPI deployed successfully on Render 🚀"}
+
+
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
