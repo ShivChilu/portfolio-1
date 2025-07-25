@@ -50,9 +50,7 @@ const EducationSection = () => {
       description: "Completed higher secondary education with focus on Physics, Chemistry, and Mathematics, building strong analytical and problem-solving foundation.",
       highlights: [
         "Top 1% performance in state",
-        "Mathematics Olympiad qualifier",
-        "Science exhibition winner",
-        "Consistent academic excellence"
+
       ],
       gradient: "from-purple-500/20 to-pink-500/20",
       accentColor: "text-purple-400"
@@ -152,12 +150,12 @@ const EducationSection = () => {
               <div className="mt-6 pt-6 border-t border-white/10 space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="caption text-white/60">DEGREE PROGRESS</span>
-                  <span className="caption text-white/60">Year 2 of 4</span>
+                  <span className="caption text-white/60">Year 3 of 4</span>
                 </div>
                 <div className="progress-bar">
                   <div 
                     className="progress-fill"
-                    style={{ width: '50%' }}
+                    style={{ width: '75%' }}
                   />
                 </div>
               </div>
