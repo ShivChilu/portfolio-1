@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BookOpen, Award, Calendar, ExternalLink, CheckCircle, Clock, Zap } from 'lucide-react';
+import { BookOpen, Award, Calendar, CheckCircle, Clock, Zap } from 'lucide-react';
 
 const TrainingSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,7 +29,6 @@ const TrainingSection = () => {
       provider: "Cipher Schools",
       duration: "June 2025 - Present",
       status: "In Progress",
-      progress: 75,
       description: "Comprehensive DSA course covering advanced concepts like dynamic programming, graph algorithms, and system design principles.",
       highlights: [
         "Advanced algorithm analysis and optimization techniques",
@@ -46,7 +45,6 @@ const TrainingSection = () => {
       provider: "Apna College",
       duration: "October 2024 - Present",
       status: "In Progress",
-      progress: 85,
       description: "Project-based curriculum focused on modern web technologies with hands-on experience in building production-ready applications.",
       highlights: [
         "React.js and modern frontend development",
@@ -150,22 +148,6 @@ const TrainingSection = () => {
           {item.description}
         </p>
 
-        {/* Progress Bar for Training */}
-        {type === 'training' && item.progress && (
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="caption text-white/60">COMPLETION PROGRESS</span>
-              <span className="caption text-white/60">{item.progress}%</span>
-            </div>
-            <div className="progress-bar">
-              <div 
-                className="progress-fill"
-                style={{ width: `${item.progress}%` }}
-              />
-            </div>
-          </div>
-        )}
-
         {/* Highlights/Skills */}
         <div className="space-y-4">
           {item.highlights && (
@@ -198,28 +180,6 @@ const TrainingSection = () => {
               ))}
             </div>
           </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex gap-3 pt-2">
-          {type === 'certification' && (
-            <>
-              <button className="btn-secondary flex-1 text-sm py-2">
-                <Award size={14} />
-                View Certificate
-              </button>
-              <button className="btn-secondary flex-1 text-sm py-2">
-                <ExternalLink size={14} />
-                Verify
-              </button>
-            </>
-          )}
-          {type === 'training' && (
-            <button className="btn-secondary w-full text-sm py-2">
-              <ExternalLink size={14} />
-              View Progress
-            </button>
-          )}
         </div>
       </div>
     </div>
@@ -332,4 +292,5 @@ const TrainingSection = () => {
     </section>
   );
 };
+
 export default TrainingSection;
