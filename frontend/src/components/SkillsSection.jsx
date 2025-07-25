@@ -55,7 +55,7 @@ const SkillsSection = () => {
         { name: "React.js", level: 88, icon: "⚛️" },
         { name: "Tailwind CSS", level: 92, icon: "🎨" },
         { name: "HTML5", level: 95, icon: "🌐" }
-      ]
+      
     },
     {
       title: "Backend Development",
@@ -108,7 +108,7 @@ const SkillsSection = () => {
           <span className="text-sm">{skill.icon}</span>
           <span className="body-sm font-medium text-white">{skill.name}</span>
         </div>
-        <span className="caption text-white/60">{skill.level}%</span>
+        <span className="caption text-white/60"></span>
       </div>
     );
   };
