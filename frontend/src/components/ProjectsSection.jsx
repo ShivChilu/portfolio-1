@@ -1,15 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { 
-  ExternalLink, 
-  Github, 
   Calendar, 
   TrendingUp, 
-  Play, 
   Award,
   Users,
   Zap,
-  Target,
-  ArrowRight
+  Target
 } from 'lucide-react';
 
 const ProjectsSection = () => {
@@ -141,45 +137,12 @@ const ProjectsSection = () => {
             </div>
           ))}
         </div>
-
-        {/* Action Buttons */}
-        <div className="flex gap-3 pt-2">
-          <button className="btn-secondary flex-1 text-sm py-2">
-            <Github size={14} />
-            Code
-          </button>
-          <button className="btn-secondary flex-1 text-sm py-2">
-            <ExternalLink size={14} />
-            Demo
-          </button>
-        </div>
       </div>
     </div>
   );
 
   const ProjectDetails = ({ project }) => (
     <div className={`space-y-8 ${isVisible ? 'animate-fadeInRight' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
-      {/* Video Placeholder */}
-      <div className="glass-card">
-        <div className="relative rounded-xl overflow-hidden aspect-video bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center group cursor-pointer border-2 border-dashed border-white/20 hover:border-white/40 transition-colors duration-300">
-          <div className="text-center space-y-4">
-            <div className={`p-6 rounded-full bg-gradient-to-br ${project.gradient} group-hover:scale-110 transition-transform duration-300`}>
-              <Play size={32} className="text-white" />
-            </div>
-            <div className="space-y-2">
-              <h4 className="heading-sm text-white">Project Demo Video</h4>
-              <p className="body-sm text-white/60">
-                Interactive demonstration of {project.title}
-              </p>
-              <p className="caption text-white/40">
-                (Placeholder - Add your video manually)
-              </p>
-            </div>
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        </div>
-      </div>
-
       {/* Detailed Achievements */}
       <div className="glass-card">
         <h4 className="heading-sm text-white mb-6 flex items-center gap-2">
@@ -267,29 +230,6 @@ const ProjectsSection = () => {
             {/* Right: Project Details */}
             <div className="sticky top-8">
               <ProjectDetails project={projects[activeProject]} />
-            </div>
-          </div>
-
-          {/* Call to Action */}
-          <div className={`mt-16 text-center ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: '0.6s' }}>
-            <div className="glass-card bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 border-2 border-white/20 max-w-4xl mx-auto">
-              <div className="space-y-6">
-                <h3 className="heading-sm text-white">Want to See More?</h3>
-                <p className="body-md text-white/80 max-w-2xl mx-auto">
-                  These are just highlights of my work. I'm constantly building new projects and experimenting with cutting-edge technologies.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button className="btn-primary group">
-                    <Github size={16} />
-                    View All Projects
-                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
-                  </button>
-                  <button className="btn-secondary">
-                    <ExternalLink size={16} />
-                    Live Demos
-                  </button>
-                </div>
-              </div>
             </div>
           </div>
         </div>
