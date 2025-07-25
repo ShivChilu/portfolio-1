@@ -175,7 +175,7 @@ const HeroSection = () => {
                   Available for Internships
                 </div>
                 <p className="body-sm" style={{ color: 'var(--text-secondary)' }}>
-                  Actively seeking <span className="font-semibold text-blue-400">Summer 2026</span> opportunities
+                  Actively seeking <span className="font-semibold text-blue-400">opportunities</span> 
                 </p>
               </div>
             </div>
