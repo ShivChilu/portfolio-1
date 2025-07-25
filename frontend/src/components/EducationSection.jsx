@@ -222,7 +222,6 @@ const EducationSection = () => {
                 <div className="text-center space-y-2">
                   <div className="text-3xl font-bold gradient-text">98.7%</div>
                   <div className="body-sm text-white/80">12th Grade</div>
-                  <div className="caption text-white/60">State Board</div>
                 </div>
                 <div className="text-center space-y-2">
                   <div className="text-3xl font-bold gradient-text">2027</div>
