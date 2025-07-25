@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUp, Heart, Mail, Linkedin, Github, MapPin, Code, Coffee } from 'lucide-react';
+import { ArrowUp, Heart, Mail, Linkedin, Github, MapPin, Code } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const Footer = () => {
@@ -172,40 +172,40 @@ const Footer = () => {
           </div>
         </div>
 
- {/* Bottom Bar */}
-<div className="py-8 border-t" style={{ borderColor: 'var(--border-color)' }}>
-  <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-    {/* Copyright */}
-    <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
-      <span className="body-sm">© {currentYear} Shiva Prasad. All rights reserved.</span>
-    </div>
+        {/* Bottom Bar */}
+        <div className="py-8 border-t" style={{ borderColor: 'var(--border-color)' }}>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            {/* Copyright */}
+            <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
+              <span className="body-sm">© {currentYear} Shiva Prasad. All rights reserved.</span>
+            </div>
 
-    {/* Made With Love */}
-    <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
-      <span className="body-sm">Built with</span>
-      <Heart size={14} className="text-red-400 animate-pulse" />
-      <span className="body-sm">using React, Tailwind CSS & modern web technologies</span>
-    </div>
+            {/* Made With Love */}
+            <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
+              <span className="body-sm">Built with</span>
+              <Heart size={14} className="text-red-400 animate-pulse" />
+              <span className="body-sm">using React, Tailwind CSS & modern web technologies</span>
+            </div>
 
-    {/* Fun Stats */}
-    <div className="flex items-center gap-2">
-      <Code size={14} />
-      <span className="caption">150+ problems solved</span>
-    </div>
-  </div>
-</div> 
+            {/* Fun Stats */}
+            <div className="flex items-center gap-2">
+              <Code size={14} />
+              <span className="caption">150+ problems solved</span>
+            </div>
+          </div>
+        </div>
 
-
-      {/* Floating Action Button for Mobile */}
-      <div className="fixed bottom-6 right-6 md:hidden z-50">
-        {showScrollTop && (
-          <button
-            onClick={scrollToTop}
-            className="p-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
-          >
-            <ArrowUp size={20} className="text-white" />
-          </button>
-        )}
+        {/* Floating Action Button for Mobile */}
+        <div className="fixed bottom-6 right-6 md:hidden z-50">
+          {showScrollTop && (
+            <button
+              onClick={scrollToTop}
+              className="p-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
+            >
+              <ArrowUp size={20} className="text-white" />
+            </button>
+          )}
+        </div>
       </div>
     </footer>
   );
