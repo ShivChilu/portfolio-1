@@ -171,7 +171,6 @@ const ProjectsSection = () => {
                 Interactive demonstration of {project.title}
               </p> */}
 {/*               <p className="caption text-white/40">
-                (Placeholder - Add your video manually)
               </p> */}
             </div>
           </div>
