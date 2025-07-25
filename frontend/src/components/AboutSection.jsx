@@ -95,14 +95,14 @@ const AboutSection = () => {
                 <div className="space-y-4" style={{ color: 'var(--text-secondary)' }}>
                   <p className="body-md leading-relaxed">
                     I'm a <span className="text-blue-400 font-semibold">Computer Science student</span> graduating in 2027, 
-                    with hands-on experience in scalable full-stack development, distributed systems, and 
+                    with hands-on experience in scalable full-stack development and 
                     object-oriented programming using Java, C++, Python, and JavaScript.
                   </p>
                   
-                  <p className="body-md leading-relaxed">
+{/*                   <p className="body-md leading-relaxed">
                     Currently seeking a <span className="text-purple-400 font-semibold">Summer 2026 Software Engineering Internship</span> 
                     to contribute to impactful, high-performance systems and grow through global team collaboration and mentorship.
-                  </p>
+                  </p> */}
                   
                   <p className="body-md leading-relaxed">
                     I thrive on solving complex problems and building user-centered applications that make a 
