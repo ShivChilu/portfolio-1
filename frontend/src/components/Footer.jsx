@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUp, Heart, Mail, Linkedin, Github, MapPin, Code } from 'lucide-react';
+import { ArrowUp, Mail, Linkedin, Github, MapPin, Code } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const Footer = () => {
@@ -180,17 +180,9 @@ const Footer = () => {
               <span className="body-sm">© {currentYear} Shiva Prasad. All rights reserved.</span>
             </div>
 
-            {/* Made With Love */}
+            {/* Built With */}
             <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
-              <span className="body-sm">Built with</span>
-              <Heart size={14} className="text-red-400 animate-pulse" />
-              <span className="body-sm">using React, Tailwind CSS & modern web technologies</span>
-            </div>
-
-            {/* Fun Stats */}
-            <div className="flex items-center gap-2">
-              <Code size={14} />
-              <span className="caption">150+ problems solved</span>
+              <span className="body-sm">Built using React, Tailwind CSS & modern web technologies</span>
             </div>
           </div>
         </div>
