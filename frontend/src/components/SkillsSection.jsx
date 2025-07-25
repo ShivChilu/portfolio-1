@@ -14,7 +14,6 @@ import {
 
 const SkillsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [animatedBars, setAnimatedBars] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -22,7 +21,6 @@ const SkillsSection = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          setTimeout(() => setAnimatedBars(true), 500);
         }
       },
       { threshold: 0.2 }
@@ -103,25 +101,14 @@ const SkillsSection = () => {
     }
   ];
 
-  const SkillBar = ({ skill, delay }) => {
+  const SkillItem = ({ skill }) => {
     return (
-      <div className="space-y-2">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <span className="text-sm">{skill.icon}</span>
-            <span className="body-sm font-medium text-white">{skill.name}</span>
-          </div>
-          <span className="caption text-white/60">{skill.level}%</span>
+      <div className="flex justify-between items-center py-2">
+        <div className="flex items-center gap-2">
+          <span className="text-sm">{skill.icon}</span>
+          <span className="body-sm font-medium text-white">{skill.name}</span>
         </div>
-        <div className="progress-bar">
-          <div 
-            className="progress-fill"
-            style={{ 
-              width: animatedBars ? `${skill.level}%` : '0%',
-              transitionDelay: `${delay}ms`
-            }}
-          />
-        </div>
+        <span className="caption text-white/60">{skill.level}%</span>
       </div>
     );
   };
@@ -174,17 +161,17 @@ const SkillsSection = () => {
                 </div>
 
                 {/* Skills List */}
-                <div className="space-y-4">
+                <div className="space-y-2">
                   {category.skills.map((skill, skillIndex) => (
-                    <SkillBar 
+                    <SkillItem 
                       key={skillIndex}
                       skill={skill}
-                      delay={categoryIndex * 200 + skillIndex * 100}
                     />
                   ))}
                 </div>
-
-                
+              </div>
+            ))}
+          </div>
 
           {/* Skills Summary */}
           <div className={`mt-16 ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
