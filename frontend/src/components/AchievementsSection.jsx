@@ -6,7 +6,7 @@ const AchievementsSection = () => {
     {
       icon: <Target size={32} />,
       title: "150+ DSA Problems",
-      description: "Solved 150+ DSA problems on LeetCode with a focus on time/space optimization.",
+      description: "Solved 150+ DSA problems on LeetCode and other platforms with a focus on time/space optimization.",
       metric: "150+",
       label: "Problems Solved"
     },
