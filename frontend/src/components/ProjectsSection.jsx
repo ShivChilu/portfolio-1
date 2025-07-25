@@ -167,13 +167,13 @@ const ProjectsSection = () => {
               <Play size={32} className="text-white" />
             </div>
             <div className="space-y-2">
-              <h4 className="heading-sm text-white">Project Demo Video</h4>
+{/*               <h4 className="heading-sm text-white">Project Demo Video</h4>
               <p className="body-sm text-white/60">
                 Interactive demonstration of {project.title}
-              </p>
-              <p className="caption text-white/40">
+              </p> */}
+{/*               <p className="caption text-white/40">
                 (Placeholder - Add your video manually)
-              </p>
+              </p> */}
             </div>
           </div>
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
