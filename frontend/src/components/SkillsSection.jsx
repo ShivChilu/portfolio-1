@@ -40,10 +40,10 @@ const SkillsSection = () => {
       color: "from-blue-500 to-cyan-500",
       bgColor: "from-blue-500/20 to-cyan-500/20",
       skills: [
-        { name: "JavaScript", level: 90, icon: "🟨" },
-        { name: "Python", level: 85, icon: "🐍" },
-        { name: "Java", level: 80, icon: "☕" },
-        { name: "C++", level: 75, icon: "⚡" }
+        { name: "JavaScript", icon: "🟨" },
+        { name: "Python", icon: "🐍" },
+        { name: "Java", icon: "☕" },
+        { name: "C++", icon: "⚡" }
       ]
     },
     {
@@ -52,10 +52,10 @@ const SkillsSection = () => {
       color: "from-purple-500 to-pink-500",
       bgColor: "from-purple-500/20 to-pink-500/20",
       skills: [
-        { name: "React.js", level: 88, icon: "⚛️" },
-        { name: "Tailwind CSS", level: 92, icon: "🎨" },
-        { name: "HTML5", level: 95, icon: "🌐" }
-      
+        { name: "React.js", icon: "⚛️" },
+        { name: "Tailwind CSS", icon: "🎨" },
+        { name: "HTML5", icon: "🌐" }
+      ]
     },
     {
       title: "Backend Development",
@@ -63,10 +63,10 @@ const SkillsSection = () => {
       color: "from-green-500 to-emerald-500",
       bgColor: "from-green-500/20 to-emerald-500/20",
       skills: [
-        { name: "Node.js", level: 82, icon: "🟢" },
-        { name: "Express.js", level: 80, icon: "🚀" },
-        { name: "RESTful APIs", level: 85, icon: "🔗" },
-        { name: "PHP", level: 70, icon: "🐘" }
+        { name: "Node.js", icon: "🟢" },
+        { name: "Express.js", icon: "🚀" },
+        { name: "RESTful APIs", icon: "🔗" },
+        { name: "PHP", icon: "🐘" }
       ]
     },
     {
@@ -75,8 +75,9 @@ const SkillsSection = () => {
       color: "from-orange-500 to-red-500",
       bgColor: "from-orange-500/20 to-red-500/20",
       skills: [
-        { name: "MongoDB", level: 83, icon: "🍃" },
-        { name: "MySQL", level: 78, icon: "🐬" }      ]
+        { name: "MongoDB", icon: "🍃" },
+        { name: "MySQL", icon: "🐬" }
+      ]
     },
     {
       title: "Tools & Platforms",
@@ -84,9 +85,9 @@ const SkillsSection = () => {
       color: "from-indigo-500 to-blue-500",
       bgColor: "from-indigo-500/20 to-blue-500/20",
       skills: [
-        { name: "Git/GitHub", level: 88, icon: "🔧" },
-        { name: "VS Code", level: 92, icon: "💻" },
-        { name: "Linux", level: 70, icon: "🐧" }
+        { name: "Git/GitHub", icon: "🔧" },
+        { name: "VS Code", icon: "💻" },
+        { name: "Linux", icon: "🐧" }
       ]
     },
     {
@@ -95,20 +96,18 @@ const SkillsSection = () => {
       color: "from-teal-500 to-cyan-500",
       bgColor: "from-teal-500/20 to-cyan-500/20",
       skills: [
-        { name: "Data Structures", level: 85, icon: "🧮" },
-        { name: "Algorithms", level: 82, icon: "🔍" },
-        { name: "OOP", level: 88, icon: "🏗️" }      ]
+        { name: "Data Structures", icon: "🧮" },
+        { name: "Algorithms", icon: "🔍" },
+        { name: "OOP", icon: "🏗️" }
+      ]
     }
   ];
 
   const SkillItem = ({ skill }) => {
     return (
-      <div className="flex justify-between items-center py-2">
-        <div className="flex items-center gap-2">
-          <span className="text-sm">{skill.icon}</span>
-          <span className="body-sm font-medium text-white">{skill.name}</span>
-        </div>
-        <span className="caption text-white/60"></span>
+      <div className="flex items-center gap-3 py-2">
+        <span className="text-sm">{skill.icon}</span>
+        <span className="body-sm font-medium text-white">{skill.name}</span>
       </div>
     );
   };
