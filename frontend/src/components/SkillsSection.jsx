@@ -56,8 +56,7 @@ const SkillsSection = () => {
       skills: [
         { name: "React.js", level: 88, icon: "⚛️" },
         { name: "Tailwind CSS", level: 92, icon: "🎨" },
-        { name: "HTML5", level: 95, icon: "🌐" },
-        { name: "UI/UX Design", level: 78, icon: "✨" }
+        { name: "HTML5", level: 95, icon: "🌐" }
       ]
     },
     {
@@ -79,10 +78,7 @@ const SkillsSection = () => {
       bgColor: "from-orange-500/20 to-red-500/20",
       skills: [
         { name: "MongoDB", level: 83, icon: "🍃" },
-        { name: "MySQL", level: 78, icon: "🐬" },
-        { name: "Cloud Computing", level: 72, icon: "☁️" },
-        { name: "Database Design", level: 80, icon: "🗄️" }
-      ]
+        { name: "MySQL", level: 78, icon: "🐬" }      ]
     },
     {
       title: "Tools & Platforms",
@@ -92,7 +88,6 @@ const SkillsSection = () => {
       skills: [
         { name: "Git/GitHub", level: 88, icon: "🔧" },
         { name: "VS Code", level: 92, icon: "💻" },
-        { name: "Agile/Scrum", level: 75, icon: "📋" },
         { name: "Linux", level: 70, icon: "🐧" }
       ]
     },
@@ -104,9 +99,7 @@ const SkillsSection = () => {
       skills: [
         { name: "Data Structures", level: 85, icon: "🧮" },
         { name: "Algorithms", level: 82, icon: "🔍" },
-        { name: "OOP", level: 88, icon: "🏗️" },
-        { name: "System Design", level: 75, icon: "🏛️" }
-      ]
+        { name: "OOP", level: 88, icon: "🏗️" }      ]
     }
   ];
 
@@ -191,19 +184,7 @@ const SkillsSection = () => {
                   ))}
                 </div>
 
-                {/* Category Footer */}
-                <div className="mt-6 pt-4 border-t border-white/10">
-                  <div className="flex items-center justify-between text-xs text-white/60">
-                    <span>Proficiency Level</span>
-                    <div className="flex items-center gap-1">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span>Advanced</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                
 
           {/* Skills Summary */}
           <div className={`mt-16 ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
