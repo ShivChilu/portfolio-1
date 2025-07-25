@@ -188,11 +188,7 @@ const Footer = () => {
             </div>
 
             {/* Fun Stats */}
-            <div className="flex items-center gap-6" style={{ color: 'var(--text-muted)' }}>
-              <div className="flex items-center gap-2">
-                <Coffee size={14} />
-                <span className="caption">Powered by coffee</span>
-              </div>
+          
               <div className="flex items-center gap-2">
                 <Code size={14} />
                 <span className="caption">150+ problems solved</span>
