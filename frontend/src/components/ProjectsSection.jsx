@@ -144,14 +144,14 @@ const ProjectsSection = () => {
 
         {/* Action Buttons */}
         <div className="flex gap-3 pt-2">
-          <button className="btn-secondary flex-1 text-sm py-2">
+{/*           <button className="btn-secondary flex-1 text-sm py-2">
             <Github size={14} />
             Code
-          </button>
-          <button className="btn-secondary flex-1 text-sm py-2">
+          </button> */}
+{/*           <button className="btn-secondary flex-1 text-sm py-2">
             <ExternalLink size={14} />
             Demo
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
@@ -160,7 +160,7 @@ const ProjectsSection = () => {
   const ProjectDetails = ({ project }) => (
     <div className={`space-y-8 ${isVisible ? 'animate-fadeInRight' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
       {/* Video Placeholder */}
-      <div className="glass-card">
+{/*       <div className="glass-card">
         <div className="relative rounded-xl overflow-hidden aspect-video bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center group cursor-pointer border-2 border-dashed border-white/20 hover:border-white/40 transition-colors duration-300">
           <div className="text-center space-y-4">
             <div className={`p-6 rounded-full bg-gradient-to-br ${project.gradient} group-hover:scale-110 transition-transform duration-300`}>
@@ -178,7 +178,7 @@ const ProjectsSection = () => {
           </div>
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         </div>
-      </div>
+      </div> */}
 
       {/* Detailed Achievements */}
       <div className="glass-card">
