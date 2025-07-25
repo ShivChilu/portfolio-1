@@ -332,3 +332,4 @@ const TrainingSection = () => {
     </section>
   );
 };
+export default TrainingSection;
