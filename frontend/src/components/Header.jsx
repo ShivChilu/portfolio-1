@@ -5,12 +5,29 @@ import { useTheme } from '../contexts/ThemeContext';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
   const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      
+      // Determine active section based on scroll position
+      const sections = ['hero', 'about', 'education', 'skills', 'projects', 'contact'];
+      const scrollPosition = window.scrollY + 100; // Offset for better detection
+      
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -33,12 +50,12 @@ const Header = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'backdrop-blur-md bg-black/20 border-b border-white/10' 
+          ? 'backdrop-blur-md bg-black/30 border-b border-white/10 shadow-lg' 
           : 'bg-transparent'
       }`}
     >
       <div className="container">
-        <nav className="flex justify-between items-center py-6">
+        <nav className="flex justify-between items-center py-4">
           {/* Logo */}
           <div 
             className="text-2xl font-bold cursor-pointer hover:text-blue-400 transition-colors duration-300 font-['Space_Grotesk']"
@@ -48,23 +65,29 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item, index) => (
               <button
                 key={item.section}
                 onClick={() => scrollToSection(item.section)}
-                className="relative text-white/80 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-white/5 group"
+                className={`relative px-4 py-2 rounded-lg transition-all duration-300 font-medium ${
+                  activeSection === item.section
+                    ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white border border-blue-400/30'
+                    : 'text-white/70 hover:text-white hover:bg-white/5'
+                }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+                {activeSection === item.section && (
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500"></span>
+                )}
               </button>
             ))}
             
             {/* Theme Toggle */}
             <button 
               onClick={toggleTheme}
-              className="theme-toggle group"
+              className="theme-toggle group ml-2"
               aria-label="Toggle theme"
             >
               {isDark ? (
@@ -93,7 +116,11 @@ const Header = () => {
               <button
                 key={item.section}
                 onClick={() => scrollToSection(item.section)}
-                className="block w-full text-left px-6 py-3 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-300"
+                className={`block w-full text-left px-6 py-3 transition-all duration-300 ${
+                  activeSection === item.section
+                    ? 'bg-blue-500/20 text-white border-l-4 border-blue-400'
+                    : 'text-white/70 hover:text-white hover:bg-white/5'
+                }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {item.label}

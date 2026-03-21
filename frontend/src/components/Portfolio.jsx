@@ -14,7 +14,7 @@ const Portfolio = () => {
   return (
     <div className="portfolio-container">
       <Header />
-      <main>
+      <main className="pt-0">
         <HeroSection />
         <AboutSection />
         <EducationSection />
