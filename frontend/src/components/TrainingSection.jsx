@@ -70,7 +70,7 @@ const TrainingSection = () => {
       issuer: "NPTEL",
       date: "October 2024",
       skills: ["AWS", "Cloud Architecture", "Virtualization"],
-      certificateUrl: "#",
+      certificateUrl: "/certificates/cloud-computing.jpg",
       certificateImage: "/certificates/cloud-computing.jpg",
       gradient: "from-green-500/20 to-emerald-500/20",
       accentColor: "text-green-400"
@@ -85,7 +85,7 @@ const TrainingSection = () => {
       issuer: "Coursera",
       date: "September 2024",
       skills: ["TCP/IP", "Network Protocols", "Network Architecture", "Troubleshooting"],
-      certificateUrl: "#",
+      certificateUrl: "https://coursera.org/verify/XBKROSCDWX3M",
       certificateImage: "/certificates/networking.jpg",
       gradient: "from-blue-500/20 to-purple-500/20",
       accentColor: "text-blue-400"
