@@ -27,8 +27,8 @@ const EducationSection = () => {
       institution: "Lovely Professional University",
       degree: "B. Tech in Computer Science and Engineering",
       duration: "August 2023 - Present",
-      location: "Jalandhar, Punjab",
-      performance: "8.41 CGPA",
+      location: "Phagwara, Punjab",
+      performance: "8.28 CGPA",
       type: "current",
       description: "Focused on advanced computer science concepts including algorithms, data structures, software engineering, and emerging technologies.",
       highlights: [
@@ -42,18 +42,33 @@ const EducationSection = () => {
     },
     {
       institution: "Narayana Junior College",
-      degree: "Intermediate (Science Stream)",
-      duration: "April 2021 – March 2023",
+      degree: "Intermediate - PCM",
+      duration: "April 2022 - March 2023",
       location: "Hyderabad, Telangana",
-      performance: "98.70%",
+      performance: "98.7%",
       type: "completed",
       description: "Completed higher secondary education with focus on Physics, Chemistry, and Mathematics, building strong analytical and problem-solving foundation.",
       highlights: [
         "Top 1% performance in state",
-
+        "Strong foundation in Mathematics and Sciences"
       ],
       gradient: "from-purple-500/20 to-pink-500/20",
       accentColor: "text-purple-400"
+    },
+    {
+      institution: "Jawahar Navodaya Vidyalaya",
+      degree: "Class 10th - CBSE",
+      duration: "April 2020 - March 2021",
+      location: "Nalgonda, Telangana",
+      performance: "96.0%",
+      type: "completed",
+      description: "Completed secondary education with comprehensive foundation in core subjects.",
+      highlights: [
+        "Excellent academic performance",
+        "Active participation in extracurricular activities"
+      ],
+      gradient: "from-green-500/20 to-emerald-500/20",
+      accentColor: "text-green-400"
     }
   ];
 

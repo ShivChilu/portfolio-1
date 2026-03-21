@@ -64,7 +64,7 @@ const HeroSection = () => {
     },
     { 
       icon: <Target size={24} />, 
-      value: '8.41', 
+      value: '8.28', 
       label: 'CGPA',
       description: 'Academic performance excellence'
     },

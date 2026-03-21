@@ -44,26 +44,26 @@ const ResumeSection = () => {
   const educationData = [
     {
       institution: "Lovely Professional University",
-      location: "Punjab, India",
+      location: "Phagwara, Punjab",
       degree: "Bachelor of Technology - Computer Science and Engineering",
-      grade: "CGPA: 8.16*",
-      period: "Since August 2022",
+      grade: "CGPA: 8.28",
+      period: "Since August 2023",
       color: "from-blue-500 to-cyan-500"
     },
     {
-      institution: "St Theresa's Convent School",
-      location: "Karnal, Haryana",
-      degree: "Intermediate",
-      grade: "Percentage: 90.4%",
-      period: "April 2021 - March 2022",
+      institution: "Narayana Junior College",
+      location: "Hyderabad, Telangana",
+      degree: "Intermediate - PCM",
+      grade: "Percentage: 98.7%",
+      period: "April 2022 - March 2023",
       color: "from-purple-500 to-pink-500"
     },
     {
-      institution: "Delhi Public School",
-      location: "Karnal, Haryana",
-      degree: "Matriculation",
-      grade: "Percentage: 93.3%",
-      period: "April 2019 - March 2020",
+      institution: "Jawahar Navodaya Vidyalaya",
+      location: "Nalgonda, Telangana",
+      degree: "Class 10th - CBSE",
+      grade: "Percentage: 96.0%",
+      period: "April 2020 - March 2021",
       color: "from-green-500 to-emerald-500"
     }
   ];
@@ -71,51 +71,58 @@ const ResumeSection = () => {
   const skillsData = [
     {
       category: "Programming Languages",
-      skills: ["JavaScript", "Python", "Java", "C++"]
+      skills: ["Java", "Python", "C", "C++"]
     },
     {
-      category: "Frontend",
-      skills: ["React.js", "HTML5", "CSS3", "Tailwind CSS"]
+      category: "Frontend Technologies",
+      skills: ["HTML", "CSS", "JavaScript", "Tailwind CSS", "React.js"]
     },
     {
-      category: "Backend",
-      skills: ["Node.js", "Express.js", "PHP", "RESTful APIs"]
+      category: "Backend Technologies",
+      skills: ["Node.js", "Express.js", "MongoDB", "PHP", "MySQL", "RESTful APIs"]
     },
     {
-      category: "Database",
-      skills: ["MongoDB", "MySQL"]
+      category: "Version Control & Tools",
+      skills: ["Git", "GitHub"]
     },
     {
-      category: "Tools & Platforms",
-      skills: ["Git/GitHub", "VS Code", "Linux"]
+      category: "Soft Skills",
+      skills: ["Adaptability", "Team Collaboration", "Problem Solving", "Communication"]
     }
   ];
 
   const projectsData = [
     {
-      name: "Fresh Meat Hub",
-      type: "E-Commerce Platform",
-      description: "Full-stack e-commerce platform with product catalog, payment integration, and order management",
-      tech: ["React", "Node.js", "MongoDB", "Express"]
+      name: "AI Packing Assistant",
+      type: "AI & Web Development",
+      date: "January 2025",
+      description: "Applied new API technologies efficiently to build real-time, weather-based packing suggestions tailored to user activity types. Optimized backend to boost page speed by 40% and built a drag-and-drop UI that enhanced packing efficiency by 25%.",
+      tech: ["API Technologies", "JavaScript", "Backend Optimization", "UI Development"]
     },
     {
-      name: "Metro Route Finder",
-      type: "Algorithm Project",
-      description: "Route optimization using Dijkstra's algorithm with interactive metro map visualization",
-      tech: ["React", "JavaScript", "Graph Algorithms"]
+      name: "Horticulture Connect",
+      type: "Full-Stack Platform",
+      date: "September 2024",
+      description: "Designed a scalable full-stack platform that gave 100+ farmers AI-based insights to increase expected profits by 20%. Implemented live data dashboards and modular backend architecture for future scalability.",
+      tech: ["Full-Stack", "AI-based Insights", "Data Dashboards", "Scalable Architecture"]
     }
   ];
 
   const extracurricularData = [
     {
-      activity: "Technical Problem Solving",
-      description: "Solved 150+ algorithmic problems on LeetCode",
-      achievement: "Strong focus on DSA and optimization"
+      activity: "Data Structures and Algorithms Training",
+      description: "Pursuing an in-depth DSA course at Cipher Schools covering core concepts such as arrays, linked lists, trees, graphs, and advanced programming techniques.",
+      achievement: "Since June 2024 - Strengthening algorithmic thinking through hands-on coding in Java and C++"
     },
     {
-      activity: "Open Source Contributions",
-      description: "Active contributor on GitHub with 20+ repositories",
-      achievement: "Collaborative development experience"
+      activity: "Full Stack Development Training",
+      description: "Learning full-stack development at Apna College through a project-based curriculum focused on modern web technologies and real-world applications.",
+      achievement: "Since December 2024 - Developing responsive web applications using React, Node.js, Express, and MongoDB"
+    },
+    {
+      activity: "Technical Problem Solving Achievement",
+      description: "Solved 150+ DSA problems across platforms like LeetCode and GeeksforGeeks",
+      achievement: "Enhanced algorithmic efficiency and problem-solving skills"
     }
   ];
 
@@ -123,8 +130,8 @@ const ResumeSection = () => {
     {
       name: "Cloud Computing",
       issuer: "NPTEL",
-      date: "October 2024",
-      grade: "Elite - 64%"
+      date: "April 2025",
+      grade: "Elite"
     },
     {
       name: "The Bits and Bytes of Computer Networking",
@@ -203,7 +210,15 @@ const ResumeSection = () => {
           style={{ animationDelay: `${index * 0.1}s` }}
         >
           <div className="flex items-start justify-between mb-3">
-            <h3 className="text-2xl font-bold text-white">{project.name}</h3>
+            <div className="flex-1">
+              <h3 className="text-2xl font-bold text-white mb-2">{project.name}</h3>
+              {project.date && (
+                <div className="flex items-center gap-2 text-blue-400 text-sm">
+                  <Calendar size={14} />
+                  <span>{project.date}</span>
+                </div>
+              )}
+            </div>
             <span className="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs font-medium border border-purple-400/30">
               {project.type}
             </span>
@@ -292,15 +307,6 @@ const ResumeSection = () => {
     }
   };
 
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/resume.pdf';
-    link.download = 'Shiva_Prasad_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <section 
       id="resume" 
@@ -353,14 +359,15 @@ const ResumeSection = () => {
 
           {/* Download Button */}
           <div className={`flex justify-center ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: '0.6s' }}>
-            <button
-              onClick={handleDownload}
+            <a
+              href="/resume.pdf"
+              download="Shiva_Prasad_Resume.pdf"
               className="group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-xl font-bold text-lg hover:from-blue-700 hover:to-blue-600 transition-all duration-300 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 hover:scale-105"
             >
               <FileText size={24} className="group-hover:rotate-12 transition-transform duration-300" />
               <span>Download Resume</span>
               <Download size={20} className="group-hover:translate-y-1 transition-transform duration-300" />
-            </button>
+            </a>
           </div>
         </div>
       </div>
