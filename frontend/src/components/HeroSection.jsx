@@ -114,8 +114,7 @@ const HeroSection = () => {
               <p className="body-lg max-w-2xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Computer Science student passionate about building 
                 <span className="text-blue-400 font-medium"> scalable web applications</span> and 
-                solving <span className="text-purple-400 font-medium">complex algorithmic challenges</span>. 
-                Currently seeking Summer 2026 internship opportunities to make a real impact.
+                solving <span className="text-purple-400 font-medium">complex algorithmic challenges</span>.
               </p>
             </div>
 

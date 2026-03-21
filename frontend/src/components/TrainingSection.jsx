@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BookOpen, Award, Calendar, CheckCircle, Clock, Zap } from 'lucide-react';
+import { BookOpen, Award, Calendar, CheckCircle, Clock, Zap, ExternalLink } from 'lucide-react';
 
 const TrainingSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('training');
+  const [flippedCard, setFlippedCard] = useState(null);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -60,28 +61,34 @@ const TrainingSection = () => {
 
   const certifications = [
     {
+      id: 1,
       title: "Cloud Computing",
       provider: "NPTEL",
-      completion: "April 2025",
+      completion: "October 2024",
       status: "Completed",
-      description: "Comprehensive study of cloud computing fundamentals, services, and deployment strategies.",
-      grade: "Elite",
-      credentialId: "NPTEL25CS001",
-      skills: ["AWS", "Cloud Architecture", "Distributed Systems"],
+      description: "Comprehensive training on cloud computing fundamentals, services, deployment models, and best practices.",
+      issuer: "NPTEL",
+      date: "October 2024",
+      skills: ["AWS", "Cloud Architecture", "Virtualization"],
+      certificateUrl: "#",
+      certificateImage: "/certificates/cloud-computing.jpg",
       gradient: "from-green-500/20 to-emerald-500/20",
       accentColor: "text-green-400"
     },
     {
-      title: "Introduction to Hardware and Operating Systems",
-      provider: "IBM",
+      id: 2,
+      title: "The Bits and Bytes of Computer Networking",
+      provider: "Coursera",
       completion: "September 2024",
       status: "Completed",
-      description: "Fundamental concepts of computer hardware, operating systems, and system administration.",
-      grade: "Distinction",
-      credentialId: "IBM24HW002",
-      skills: ["Operating Systems", "Hardware", "System Admin"],
-      gradient: "from-orange-500/20 to-red-500/20",
-      accentColor: "text-orange-400"
+      description: "In-depth study of computer networking concepts, protocols, and network infrastructure fundamentals.",
+      issuer: "Coursera",
+      date: "September 2024",
+      skills: ["TCP/IP", "Network Protocols", "Network Architecture", "Troubleshooting"],
+      certificateUrl: "#",
+      certificateImage: "/certificates/networking.jpg",
+      gradient: "from-blue-500/20 to-purple-500/20",
+      accentColor: "text-blue-400"
     }
   ];
 
@@ -134,13 +141,6 @@ const TrainingSection = () => {
               </div>
             </div>
           </div>
-
-          {type === 'certification' && item.grade && (
-            <div className={`text-center p-3 rounded-xl bg-gradient-to-br ${item.gradient} border border-white/20`}>
-              <div className="body-sm font-bold text-white">{item.grade}</div>
-              <div className="caption text-white/70">Grade</div>
-            </div>
-          )}
         </div>
 
         {/* Description */}
@@ -184,6 +184,145 @@ const TrainingSection = () => {
       </div>
     </div>
   );
+
+  const CertificationCard = ({ cert, index }) => {
+    const isFlipped = flippedCard === cert.id;
+
+    return (
+      <div 
+        className={`flip-card-container ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}
+        style={{ animationDelay: `${index * 0.1}s` }}
+      >
+        <div 
+          className={`flip-card ${isFlipped ? 'flipped' : ''}`}
+          onClick={() => setFlippedCard(isFlipped ? null : cert.id)}
+        >
+          {/* Front of Card */}
+          <div className="flip-card-front glass-card hover-lift cursor-pointer">
+            <div className="space-y-6">
+              {/* Certificate Image */}
+              <div className="relative w-full h-48 rounded-lg overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
+                <img 
+                  src={cert.certificateImage} 
+                  alt={cert.title}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.parentElement.classList.add('flex', 'items-center', 'justify-center');
+                    e.target.parentElement.innerHTML = '<div class="text-white/60 text-center"><div class="text-4xl mb-2">📚</div><div>Certificate Image</div></div>';
+                  }}
+                />
+              </div>
+
+              {/* Certificate Header */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className={`p-2 rounded-lg bg-gradient-to-br ${cert.gradient}`}>
+                    <Award size={20} className={cert.accentColor} />
+                  </div>
+                  <div className="px-3 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-400">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle size={12} />
+                      Completed
+                    </div>
+                  </div>
+                </div>
+                
+                <h3 className="heading-sm text-white">
+                  {cert.title}
+                </h3>
+                
+                <div className="flex items-center gap-4 text-white/60">
+                  <span className="body-sm font-medium">{cert.provider}</span>
+                  <div className="w-1 h-1 bg-white/40 rounded-full"></div>
+                  <div className="flex items-center gap-1">
+                    <Calendar size={14} />
+                    <span className="body-sm">{cert.completion}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Click to flip indicator */}
+              <div className="text-center pt-4 border-t border-white/10">
+                <p className="caption text-white/60">Click to view details</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Back of Card */}
+          <div className="flip-card-back glass-card hover-lift cursor-pointer">
+            <div className="space-y-6 h-full flex flex-col">
+              <div className="flex items-center gap-3">
+                <div className={`p-2 rounded-lg bg-gradient-to-br ${cert.gradient}`}>
+                  <Award size={20} className={cert.accentColor} />
+                </div>
+                <h3 className="heading-sm text-white">
+                  {cert.title}
+                </h3>
+              </div>
+
+              <div className="space-y-4 flex-1">
+                {/* Issued By */}
+                <div className="flex items-start gap-3">
+                  <div className="text-2xl">📚</div>
+                  <div>
+                    <div className="body-sm font-semibold text-white">Issued by:</div>
+                    <div className="body-sm text-white/80">{cert.issuer}</div>
+                  </div>
+                </div>
+
+                {/* Date */}
+                <div className="flex items-start gap-3">
+                  <div className="text-2xl">🗓️</div>
+                  <div>
+                    <div className="body-sm font-semibold text-white">Date:</div>
+                    <div className="body-sm text-white/80">{cert.date}</div>
+                  </div>
+                </div>
+
+                {/* Skills */}
+                <div className="flex items-start gap-3">
+                  <div className="text-2xl">🔍</div>
+                  <div className="flex-1">
+                    <div className="body-sm font-semibold text-white mb-2">Skills:</div>
+                    <div className="flex flex-wrap gap-2">
+                      {cert.skills.map((skill, skillIndex) => (
+                        <span 
+                          key={skillIndex}
+                          className="px-2 py-1 bg-white/10 text-white text-xs rounded-full border border-white/20"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* View Certificate Button */}
+              <div className="pt-4 border-t border-white/10">
+                <a
+                  href={cert.certificateUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-400 rounded-lg hover:from-blue-500/30 hover:to-cyan-500/30 transition-all duration-300 border border-blue-400/30"
+                >
+                  <ExternalLink size={16} />
+                  <span className="text-sm font-medium">View Certificate</span>
+                </a>
+              </div>
+
+              {/* Click to flip indicator */}
+              <div className="text-center">
+                <p className="caption text-white/60">Click to flip back</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <section 
@@ -250,7 +389,7 @@ const TrainingSection = () => {
                   <TrainingCard key={index} item={training} index={index} type="training" />
                 ))
               : certifications.map((cert, index) => (
-                  <TrainingCard key={index} item={cert} index={index} type="certification" />
+                  <CertificationCard key={cert.id} cert={cert} index={index} />
                 ))
             }
           </div>

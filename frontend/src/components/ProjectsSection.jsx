@@ -5,7 +5,9 @@ import {
   Award,
   Users,
   Zap,
-  Target
+  Target,
+  ExternalLink,
+  Github
 } from 'lucide-react';
 
 const ProjectsSection = () => {
@@ -33,45 +35,51 @@ const ProjectsSection = () => {
   const projects = [
     {
       id: 1,
-      title: "AI Packing Assistant",
-      period: "January 2025",
-      category: "AI & Web Development",
-      description: "Implemented a REST API-based system for the travel assistant that analyzed weather patterns and user profiles, delivering intelligent packing suggestions for 100+ destinations with real-time data processing.",
-      technologies: ["HTML5", "Tailwind CSS", "JavaScript", "PHP", "REST API", "Weather API"],
+      title: "Fresh Meat Hub",
+      period: "E-Commerce Platform",
+      category: "Full-Stack Web Application",
+      description: "A comprehensive e-commerce platform designed for a meat shop, featuring product listings, shopping cart, order management, and secure payment integration. Built with modern web technologies to deliver a seamless shopping experience for customers.",
+      technologies: ["React", "Node.js", "MongoDB", "Express", "Payment Gateway", "REST API"],
       achievements: [
-        "Improved user interaction by 25% and accuracy of suggestions by 35%",
-        "Enhanced performance with backend query optimizations",
-        "Reduced load time by 40% across 98% of devices",
-        "Integrated real-time weather data from multiple sources"
+        "Fully functional e-commerce platform with product catalog",
+        "Integrated secure payment processing system",
+        "Real-time inventory management and order tracking",
+        "Responsive design for seamless mobile shopping experience"
       ],
       stats: {
-        destinations: { value: "100+", label: "Destinations", icon: <Target size={16} /> },
-        improvement: { value: "25%", label: "User Engagement", icon: <TrendingUp size={16} /> },
-        performance: { value: "40%", label: "Load Time Reduction", icon: <Zap size={16} /> }
+        features: { value: "15+", label: "Features", icon: <Target size={16} /> },
+        performance: { value: "Fast", label: "Load Time", icon: <Zap size={16} /> },
+        responsive: { value: "100%", label: "Mobile Ready", icon: <Award size={16} /> }
       },
-      gradient: "from-blue-500/20 to-cyan-500/20",
-      accentColor: "text-blue-400"
+      gradient: "from-red-500/20 to-orange-500/20",
+      accentColor: "text-red-400",
+      deployedLink: "https://fresh-meat-hub.onrender.com",
+      sourceCode: "https://github.com/ShivChilu/fresh-meat-hub",
+      coverImage: "/projects/fresh-meat-hub-cover.jpg"
     },
     {
       id: 2,
-      title: "Horticulture Connect",
-      period: "September 2024",
-      category: "Full-Stack Web Application",
-      description: "Built a comprehensive scalable web application helping 100+ farmers monitor real-time crop market trends, optimize storage planning, and make data-driven agricultural decisions.",
-      technologies: ["HTML5", "Tailwind CSS", "JavaScript", "MySQL", "PHP", "Chart.js", "Dashboard UI"],
+      title: "Metro Route Finder",
+      period: "Optimization Algorithm",
+      category: "Algorithm & Web Development",
+      description: "An intelligent metro route finder that helps users find the cheapest and shortest paths in metro systems using Dijkstra's algorithm. Features real-time route calculation, fare optimization, and interactive metro map visualization.",
+      technologies: ["React", "JavaScript", "Dijkstra's Algorithm", "Graph Data Structure", "Tailwind CSS", "Vercel"],
       achievements: [
-        "Boosted average farmer profits by 20% through integrated dashboards",
-        "Achieved 9/10 satisfaction rating from local stakeholders",
-        "Improved decision-making speed by 30% among users",
-        "Successfully deployed"
+        "Implemented Dijkstra's algorithm for optimal route finding",
+        "Finds both shortest distance and cheapest fare routes",
+        "Interactive metro map with station selection",
+        "Real-time path calculation with detailed fare breakdown"
       ],
       stats: {
-        farmers: { value: "100+", label: "Active Farmers", icon: <Users size={16} /> },
-        profit: { value: "20%", label: "Profit Increase", icon: <TrendingUp size={16} /> },
-        satisfaction: { value: "9/10", label: "User Satisfaction", icon: <Award size={16} /> }
+        algorithm: { value: "O(V²)", label: "Time Complexity", icon: <Target size={16} /> },
+        routes: { value: "Optimal", label: "Route Finding", icon: <TrendingUp size={16} /> },
+        stations: { value: "50+", label: "Metro Stations", icon: <Users size={16} /> }
       },
-      gradient: "from-green-500/20 to-emerald-500/20",
-      accentColor: "text-green-400"
+      gradient: "from-blue-500/20 to-cyan-500/20",
+      accentColor: "text-blue-400",
+      deployedLink: "https://metro-route-finder.vercel.app/",
+      sourceCode: "https://github.com/ShivChilu/metro-route-finder",
+      coverImage: "/projects/metro-route-finder-cover.jpg"
     }
   ];
 
@@ -84,6 +92,22 @@ const ProjectsSection = () => {
       onClick={() => setActiveProject(index)}
     >
       <div className="space-y-6">
+        {/* Project Cover Image */}
+        {project.coverImage && (
+          <div className="relative w-full h-48 rounded-lg overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
+            <img 
+              src={project.coverImage} 
+              alt={project.title}
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.parentElement.classList.add('flex', 'items-center', 'justify-center');
+                e.target.parentElement.innerHTML = '<div class="text-white/60">Project Cover Image</div>';
+              }}
+            />
+          </div>
+        )}
+
         {/* Project Header */}
         <div className="flex items-start justify-between">
           <div className="space-y-2">
@@ -121,6 +145,30 @@ const ProjectsSection = () => {
               </span>
             ))}
           </div>
+        </div>
+
+        {/* Project Links */}
+        <div className="flex gap-3 pt-4 border-t border-white/10">
+          <a
+            href={project.deployedLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-400 rounded-lg hover:from-blue-500/30 hover:to-cyan-500/30 transition-all duration-300 border border-blue-400/30"
+          >
+            <ExternalLink size={16} />
+            <span className="text-sm font-medium">View Live</span>
+          </a>
+          <a
+            href={project.sourceCode}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-all duration-300 border border-white/20"
+          >
+            <Github size={16} />
+            <span className="text-sm font-medium">Source Code</span>
+          </a>
         </div>
 
         {/* Quick Stats */}
