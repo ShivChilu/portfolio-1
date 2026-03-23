@@ -112,12 +112,12 @@ const Header = () => {
         <div className={`md:hidden transition-all duration-300 overflow-hidden ${
           isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}>
-          <div className="py-4 space-y-2 bg-black/20 backdrop-blur-md rounded-lg border border-white/10 mt-2">
+          <div className="py-4 space-y-2 bg-black/20 backdrop-blur-md rounded-lg border border-white/10 mt-2 mx-4">
             {navItems.map((item, index) => (
               <button
                 key={item.section}
                 onClick={() => scrollToSection(item.section)}
-                className={`block w-full text-left px-6 py-3 transition-all duration-300 ${
+                className={`block w-full text-left px-4 py-3 transition-all duration-300 text-sm ${
                   activeSection === item.section
                     ? 'bg-blue-500/20 text-white border-l-4 border-blue-400'
                     : 'text-white/70 hover:text-white hover:bg-white/5'
@@ -127,7 +127,7 @@ const Header = () => {
                 {item.label}
               </button>
             ))}
-            <div className="px-6 pt-4 flex justify-center">
+            <div className="px-4 pt-4 flex justify-center">
               <button 
                 onClick={toggleTheme}
                 className="theme-toggle group"

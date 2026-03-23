@@ -83,7 +83,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section id="hero" className="min-h-screen bg-pattern flex items-center justify-center relative overflow-hidden pt-24">
+    <section id="hero" className="min-h-screen bg-pattern flex items-center justify-center relative overflow-hidden pt-24 px-4 md:px-0">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className={`absolute top-1/4 left-1/4 w-64 h-64 ${isDark ? 'bg-blue-500/10' : 'bg-blue-500/20'} rounded-full blur-3xl animate-pulse`}></div>
@@ -92,35 +92,35 @@ const HeroSection = () => {
       </div>
 
       <div className="container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
-          <div className={`space-y-8 ${mounted ? 'animate-fadeInLeft' : 'opacity-0'}`}>
-            <div className="space-y-4">
-              <p className="caption text-blue-400 tracking-wider">
+          <div className={`space-y-6 md:space-y-8 ${mounted ? 'animate-fadeInLeft' : 'opacity-0'}`}>
+            <div className="space-y-3 md:space-y-4">
+              <p className="caption text-blue-400 tracking-wider text-sm md:text-base">
                 👋 Hello, I'm
               </p>
               
-              <h1 className="heading-xl">
+              <h1 className="heading-xl text-4xl md:text-5xl lg:text-6xl">
                 Shiva <span className="gradient-text">Prasad</span>
               </h1>
               
-              <div className="h-16 flex items-center">
-                <h2 className="heading-md" style={{ color: 'var(--text-secondary)' }}>
+              <div className="h-12 md:h-16 flex items-center overflow-hidden">
+                <h2 className="heading-md text-xl md:text-2xl lg:text-3xl" style={{ color: 'var(--text-secondary)' }}>
                   {typedText}
-                  <span className="inline-block w-1 h-8 bg-blue-400 ml-1 animate-pulse"></span>
+                  <span className="inline-block w-0.5 md:w-1 h-6 md:h-8 bg-blue-400 ml-1 animate-pulse"></span>
                 </h2>
               </div>
               
-              <p className="body-lg max-w-2xl leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              <p className="body-lg max-w-2xl leading-relaxed text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>
                 Computer Science student passionate about building 
                 <span className="text-blue-400 font-medium"> scalable web applications</span> and 
                 solving <span className="text-purple-400 font-medium">complex algorithmic challenges</span>.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-4">
               <button 
-                className="btn-primary group"
+                className="btn-primary group text-sm md:text-base py-3 md:py-4"
                 onClick={scrollToAbout}
               >
                 Explore My Work
@@ -128,7 +128,7 @@ const HeroSection = () => {
               </button>
               
               <button 
-                className="btn-secondary"
+                className="btn-secondary text-sm md:text-base py-3 md:py-4"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Get In Touch
@@ -138,26 +138,26 @@ const HeroSection = () => {
 
           {/* Right Stats Grid */}
           <div className={`${mounted ? 'animate-fadeInRight' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-4 md:gap-6">
               {statsData.map((stat, index) => (
                 <div 
                   key={index}
-                  className="glass-card hover-lift group text-center"
+                  className="glass-card hover-lift group text-center p-4 md:p-6"
                   style={{ animationDelay: `${0.5 + index * 0.1}s` }}
                 >
-                  <div className="flex flex-col items-center space-y-3">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 text-blue-400 group-hover:text-white transition-colors duration-300">
+                  <div className="flex flex-col items-center space-y-2 md:space-y-3">
+                    <div className="p-2 md:p-3 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 text-blue-400 group-hover:text-white transition-colors duration-300">
                       {stat.icon}
                     </div>
                     
                     <div className="space-y-1">
-                      <div className="heading-md gradient-text font-bold">
+                      <div className="text-2xl md:text-3xl lg:text-4xl gradient-text font-bold">
                         {stat.value}
                       </div>
-                      <div className="body-sm font-medium" style={{ color: 'var(--text-primary)' }}>
+                      <div className="text-xs md:text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
                         {stat.label}
                       </div>
-                      <div className="caption" style={{ color: 'var(--text-secondary)' }}>
+                      <div className="caption text-xs hidden md:block" style={{ color: 'var(--text-secondary)' }}>
                         {stat.description}
                       </div>
                     </div>
@@ -167,13 +167,13 @@ const HeroSection = () => {
             </div>
 
             {/* Floating Action Card */}
-            <div className="mt-8 glass-card text-center bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-2" style={{ borderColor: 'var(--border-hover)' }}>
-              <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 text-green-400 rounded-full text-sm font-medium">
+            <div className="mt-6 md:mt-8 glass-card text-center bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-2 p-4 md:p-6" style={{ borderColor: 'var(--border-hover)' }}>
+              <div className="space-y-2 md:space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-green-500/20 text-green-400 rounded-full text-xs md:text-sm font-medium">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                   Available for Internships
                 </div>
-                <p className="body-sm" style={{ color: 'var(--text-secondary)' }}>
+                <p className="text-xs md:text-sm" style={{ color: 'var(--text-secondary)' }}>
                   Actively seeking <span className="font-semibold text-blue-400">opportunities</span> 
                 </p>
               </div>
@@ -182,13 +182,13 @@ const HeroSection = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:flex">
           <button 
             onClick={scrollToAbout}
             className="flex flex-col items-center space-y-2 hover:text-white transition-colors duration-300 group"
             style={{ color: 'var(--text-secondary)' }}
           >
-            <span className="caption">Scroll to explore</span>
+            <span className="caption text-xs">Scroll to explore</span>
             <div className="w-6 h-10 border-2 rounded-full flex justify-center group-hover:border-white/60 transition-colors duration-300" style={{ borderColor: 'var(--border-color)' }}>
               <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce group-hover:bg-white" style={{ backgroundColor: 'var(--text-secondary)' }}></div>
             </div>
