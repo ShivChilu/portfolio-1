@@ -42,19 +42,19 @@ export const ThemeProvider = ({ children }) => {
       document.body.classList.add('dark');
       document.body.classList.remove('light');
     } else {
-      // Light theme colors
+      // Light theme colors - Enhanced for better visibility
       root.style.setProperty('--bg-primary', '#ffffff');
       root.style.setProperty('--bg-secondary', '#f8fafc');
-      root.style.setProperty('--bg-tertiary', '#f1f5f9');
-      root.style.setProperty('--bg-glass', 'rgba(0, 0, 0, 0.05)');
-      root.style.setProperty('--bg-card', 'rgba(0, 0, 0, 0.03)');
+      root.style.setProperty('--bg-tertiary', '#e2e8f0');
+      root.style.setProperty('--bg-glass', 'rgba(0, 0, 0, 0.08)');
+      root.style.setProperty('--bg-card', 'rgba(0, 0, 0, 0.05)');
       
-      root.style.setProperty('--text-primary', '#1e293b');
-      root.style.setProperty('--text-secondary', '#64748b');
-      root.style.setProperty('--text-muted', '#94a3b8');
+      root.style.setProperty('--text-primary', '#0f172a');
+      root.style.setProperty('--text-secondary', '#334155');
+      root.style.setProperty('--text-muted', '#64748b');
       
-      root.style.setProperty('--border-color', 'rgba(0, 0, 0, 0.1)');
-      root.style.setProperty('--border-hover', 'rgba(0, 0, 0, 0.2)');
+      root.style.setProperty('--border-color', 'rgba(0, 0, 0, 0.15)');
+      root.style.setProperty('--border-hover', 'rgba(0, 0, 0, 0.25)');
       
       document.body.classList.add('light');
       document.body.classList.remove('dark');
