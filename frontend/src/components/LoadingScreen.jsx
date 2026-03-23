@@ -6,34 +6,44 @@ const LoadingScreen = ({ onComplete }) => {
   const [isComplete, setIsComplete] = useState(false);
 
   const bootSequence = [
-    { text: "Booting system...", delay: 500 },
-    { text: "Initializing portfolio...", delay: 800 },
-    { text: "Access granted ✓", delay: 600 },
-    { text: "", delay: 400 },
-    { text: "Welcome to my portfolio", delay: 600 },
-    { text: ">>> Shiva Prasad", delay: 500 },
-    { text: ">>> Computer Science Student", delay: 500 },
-    { text: ">>> Full Stack Developer", delay: 500 },
-    { text: "", delay: 400 },
-    { text: "System Ready 🚀", delay: 800 }
+    { text: "Booting system...", delay: 0 }, // Start immediately
+    { text: "Initializing portfolio...", delay: 1200 },
+    { text: "Access granted ✓", delay: 1000 },
+    { text: "", delay: 600 },
+    { text: "Welcome to my portfolio", delay: 800 },
+    { text: ">>> Shiva Prasad", delay: 800 },
+    { text: ">>> Computer Science Student", delay: 800 },
+    { text: ">>> Full Stack Developer", delay: 800 },
+    { text: "", delay: 600 },
+    { text: "System Ready 🚀", delay: 1200 }
   ];
 
   useEffect(() => {
+    console.log('LoadingScreen mounted, currentLine:', currentLine);
+    
+    if (currentLine === 0) {
+      // Immediately show first line
+      setLines([bootSequence[0].text]);
+      setCurrentLine(1);
+      return;
+    }
+
     if (currentLine < bootSequence.length) {
       const timer = setTimeout(() => {
         setLines(prev => [...prev, bootSequence[currentLine].text]);
         setCurrentLine(prev => prev + 1);
-      }, bootSequence[currentLine].delay);
+      }, bootSequence[currentLine - 1].delay);
 
       return () => clearTimeout(timer);
     } else if (!isComplete) {
-      // Wait a bit before fading out
+      // Wait longer before fading out
       const completeTimer = setTimeout(() => {
         setIsComplete(true);
         setTimeout(() => {
+          console.log('Calling onComplete');
           onComplete();
-        }, 800);
-      }, 1000);
+        }, 1000);
+      }, 1500);
 
       return () => clearTimeout(completeTimer);
     }
@@ -41,7 +51,7 @@ const LoadingScreen = ({ onComplete }) => {
 
   return (
     <div 
-      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20 transition-opacity duration-800 ${
+      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20 transition-opacity duration-1000 ${
         isComplete ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >

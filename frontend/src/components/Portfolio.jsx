@@ -22,11 +22,17 @@ const Portfolio = () => {
   useEffect(() => {
     // Check if user has already seen the loading screen in this session
     const hasSeenLoading = sessionStorage.getItem('hasSeenLoading');
+    console.log('Has seen loading:', hasSeenLoading);
     
-    if (hasSeenLoading) {
+    if (hasSeenLoading === 'true') {
+      // Skip loading screen if already seen in this session
+      console.log('Skipping loading screen');
       setIsLoading(false);
       setShowContent(true);
+    } else {
+      console.log('Showing loading screen');
     }
+    // If hasSeenLoading is not 'true', keep isLoading as true (default state)
   }, []);
 
   useEffect(() => {
@@ -41,10 +47,12 @@ const Portfolio = () => {
   }, []);
 
   const handleLoadingComplete = () => {
+    console.log('Loading complete, setting session storage');
     sessionStorage.setItem('hasSeenLoading', 'true');
     setIsLoading(false);
     setTimeout(() => {
       setShowContent(true);
+      console.log('Content visible');
     }, 100);
   };
 
