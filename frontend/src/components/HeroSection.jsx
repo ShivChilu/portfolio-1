@@ -84,20 +84,6 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="min-h-screen bg-pattern flex items-center justify-center relative overflow-hidden pt-24">
-      {/* Status Badge - Top Right */}
-      <div className="absolute top-24 right-8 z-10 hidden lg:block">
-        <div className="glass-card px-5 py-3 flex items-center gap-3 hover:scale-105 transition-transform duration-300 animate-fadeInRight">
-          <div className="relative">
-            <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-            <div className="absolute inset-0 w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Zap size={16} className="text-yellow-400" />
-            <span className="text-sm font-semibold text-white/90">Available for Opportunities</span>
-          </div>
-        </div>
-      </div>
-
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className={`absolute top-1/4 left-1/4 w-64 h-64 ${isDark ? 'bg-blue-500/10' : 'bg-blue-500/20'} rounded-full blur-3xl animate-pulse`}></div>
