@@ -76,7 +76,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Account for fixed header */
+  scroll-padding-top: 100px; /* Account for fixed header with extra gap */
 }
 
 body {
@@ -300,14 +300,19 @@ section {
 
 /* Section Spacing - Consistent across all sections */
 section:not(#hero) {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
 }
 
 #hero {
   min-height: 100vh;
   padding-top: 0;
   padding-bottom: 0;
+}
+
+/* First section after hero gets extra top padding */
+#about {
+  padding-top: 8rem;
 }
 
 /* Line clamp utility */

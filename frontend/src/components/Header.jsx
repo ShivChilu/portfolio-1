@@ -56,7 +56,7 @@ const Header = () => {
       }`}
     >
       <div className="container">
-        <nav className="flex justify-between items-center py-4">
+        <nav className="flex justify-between items-center py-5">{/* Increased padding */}
           {/* Logo */}
           <div 
             className="text-2xl font-bold cursor-pointer hover:text-blue-400 transition-colors duration-300 font-['Space_Grotesk']"

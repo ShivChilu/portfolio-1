@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUp, Zap } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 
 const FloatingButtons = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -32,20 +32,6 @@ const FloatingButtons = () => {
       >
         <ArrowUp size={24} />
       </button>
-
-      {/* Live Status Indicator */}
-      <div className="fixed top-20 right-8 z-40 hidden lg:block">
-        <div className="glass-card px-4 py-3 flex items-center gap-3 hover:scale-105 transition-transform duration-300">
-          <div className="relative">
-            <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-            <div className="absolute inset-0 w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Zap size={14} className="text-yellow-400" />
-            <span className="text-sm font-medium text-white/90">Available for Opportunities</span>
-          </div>
-        </div>
-      </div>
     </>
   );
 };
