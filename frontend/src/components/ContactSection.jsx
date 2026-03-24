@@ -5,10 +5,8 @@ import {
   MapPin, 
   Linkedin, 
   Github, 
-  ExternalLink, 
-  Send,
-  MessageCircle,
-  Calendar
+  ExternalLink,
+  MessageCircle
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -207,40 +205,8 @@ const ContactSection = () => {
               </div>
             </div>
 
-            {/* Right: Contact Form & CTA */}
+            {/* Right: Information Cards */}
             <div className={`space-y-8 ${isVisible ? 'animate-fadeInRight' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
-              {/* Quick Contact Options */}
-              <div className="glass-card">
-                <h3 className="heading-sm mb-6">Quick Connect</h3>
-                <div className="grid gap-4">
-                  <a 
-                    href="mailto:chiluverushivaprasad02@gmail.com"
-                    className="btn-primary group w-full"
-                  >
-                    <Mail size={16} />
-                    Send Email
-                    <Send size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
-                  </a>
-                  
-                  <a 
-                    href="https://www.linkedin.com/in/shiva01/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-secondary group w-full"
-                  >
-                    <Linkedin size={16} />
-                    Connect on LinkedIn
-                    <ExternalLink size={16} className="group-hover:scale-110 transition-transform duration-300" />
-                  </a>
-
-                  <button className="btn-secondary group w-full">
-                    <Calendar size={16} />
-                    Schedule a Call
-                    <MessageCircle size={16} className="group-hover:bounce transition-transform duration-300" />
-                  </button>
-                </div>
-              </div>
-
               {/* Collaboration CTA */}
               <div className="glass-card bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 border-2" style={{ borderColor: 'var(--border-hover)' }}>
                 <div className="text-center space-y-6">
