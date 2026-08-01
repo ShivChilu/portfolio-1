@@ -9,12 +9,12 @@ const ProjectsSection = () => {
   return (
     <section 
       id="projects" 
-      className="py-24 bg-white dark:bg-zinc-950 border-b border-zinc-200/50 dark:border-zinc-800/50 transition-colors duration-300"
+      className="py-14 md:py-24 bg-white dark:bg-zinc-950 border-b border-zinc-200/50 dark:border-zinc-800/50 transition-colors duration-300"
     >
       <div className="max-w-6xl mx-auto px-6">
         
         {/* Header */}
-        <div className="mb-12 text-left">
+        <div className="mb-8 md:mb-12 text-left">
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
             Projects
           </h2>

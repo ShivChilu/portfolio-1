@@ -8,7 +8,6 @@ import EducationSection from './EducationSection';
 import CertificationsSection from './CertificationsSection';
 import ContactSection from './ContactSection';
 import Footer from './Footer';
-import CustomCursor from './CustomCursor';
 import WebsiteTour from './WebsiteTour';
 import FloatingDock from './FloatingDock';
 import { useTheme } from '../contexts/ThemeContext';
@@ -58,9 +57,7 @@ const Portfolio = () => {
   return (
     <div className="relative min-h-screen bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300 selection:bg-purple-500/20">
       
-      {/* Custom Cursor (Subtle, desktop only) */}
-      <CustomCursor />
-
+      
       {/* Website Tour Guide Overlay */}
       <WebsiteTour 
         activeTourStep={activeTourStep}

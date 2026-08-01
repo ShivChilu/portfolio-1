@@ -59,17 +59,16 @@ const ContactSection = () => {
   return (
     <section 
       id="contact" 
-      className="py-24 bg-zinc-50 dark:bg-zinc-950 border-b border-zinc-200/50 dark:border-zinc-800/50 transition-colors duration-300 relative"
+      className="py-14 md:py-24 bg-zinc-50 dark:bg-zinc-950 border-b border-zinc-200/50 dark:border-zinc-800/50 transition-colors duration-300 relative"
     >
       <div className="max-w-6xl mx-auto px-6">
         
-        {/* Header */}
-        <div className="space-y-3 mb-16 text-left">
+        <div className="space-y-3 mb-10 md:mb-16 text-left">
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
-            Let's Collaborate
+            Professional Inquiries
           </h2>
           <p className="text-zinc-500 dark:text-zinc-400 max-w-xl text-sm">
-            Have a project in mind, an internship opening, or just want to grab a coffee? Drop a line below.
+            If you are looking for a Full Stack Developer for internships, full-time positions, or professional collaborations, please feel free to reach out.
           </p>
         </div>
 
