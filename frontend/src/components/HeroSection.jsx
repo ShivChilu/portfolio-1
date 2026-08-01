@@ -274,7 +274,7 @@ const HeroSection = () => {
             </div>
 
             {/* Stats Bar */}
-            <div className="grid grid-cols-4 gap-4 sm:gap-6 max-w-md">
+            <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-md">
               {personalInfo.heroStats.map((stat, i) => (
                 <div key={i} className="text-center sm:text-left">
                   <div className="text-base sm:text-lg font-extrabold text-zinc-900 dark:text-zinc-50">{stat.value}</div>

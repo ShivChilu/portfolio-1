@@ -14,10 +14,9 @@ export const personalInfo = {
   graduationYear: "2027",
   cgpa: "8.25",
   heroStats: [
-    { value: "150+", label: "DSA Solved" },
     { value: "8.25", label: "CGPA (LPU)" },
     { value: "2+", label: "Years Dev Experience" },
-    { value: "5+", label: "Certifications" }
+    { value: "3+", label: "Certifications" }
   ]
 };
 
@@ -136,7 +135,7 @@ export const certifications = [
   {
     title: "AWS Certified Cloud Practitioner",
     provider: "AWS",
-    date: "July 2026",
+    date: "May 2025",
     credentialId: "efeed383-7b92-4a45-b218-ecae0986e493",
     verifyUrl: "https://www.credly.com/badges/efeed383-7b92-4a45-b218-ecae0986e493"
   },

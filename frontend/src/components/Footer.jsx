@@ -24,7 +24,6 @@ const Footer = () => {
         {/* Left Side: Copyright */}
         <div className="text-zinc-500 dark:text-zinc-400 text-xs text-center md:text-left leading-relaxed">
           <p>© {new Date().getFullYear()} {personalInfo.name}. All rights reserved.</p>
-          <p className="mt-1 text-[10px] text-zinc-400">Handcrafted in Hyderabad, India.</p>
         </div>
 
         {/* Right Side: Social & Back to Top */}
