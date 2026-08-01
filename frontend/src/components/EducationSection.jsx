@@ -1,257 +1,81 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { GraduationCap, MapPin, Calendar, Award, TrendingUp, Star } from 'lucide-react';
+import React from 'react';
+import { education } from '../data/portfolioData';
+import { BookOpen, GraduationCap, MapPin, Calendar, Award } from 'lucide-react';
 
 const EducationSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const educationData = [
-    {
-      institution: "Lovely Professional University",
-      degree: "B. Tech in Computer Science and Engineering",
-      duration: "August 2023 - Present",
-      location: "Phagwara, Punjab",
-      performance: "8.28 CGPA",
-      type: "current",
-      description: "Focused on advanced computer science concepts including algorithms, data structures, software engineering, and emerging technologies.",
-      highlights: [
-        "Specialized in Full-Stack Development",
-        "Active member of Coding Club",
-        "Participated in multiple hackathons",
-        "Leadership role in team projects"
-      ],
-      gradient: "from-blue-500/20 to-cyan-500/20",
-      accentColor: "text-blue-400"
-    },
-    {
-      institution: "Narayana Junior College",
-      degree: "Intermediate - PCM",
-      duration: "April 2022 - March 2023",
-      location: "Hyderabad, Telangana",
-      performance: "98.7%",
-      type: "completed",
-      description: "Completed higher secondary education with focus on Physics, Chemistry, and Mathematics, building strong analytical and problem-solving foundation.",
-      highlights: [
-        "Top 1% performance in state",
-        "Strong foundation in Mathematics and Sciences"
-      ],
-      gradient: "from-purple-500/20 to-pink-500/20",
-      accentColor: "text-purple-400"
-    },
-    {
-      institution: "Jawahar Navodaya Vidyalaya",
-      degree: "Class 10th - CBSE",
-      duration: "April 2020 - March 2021",
-      location: "Nalgonda, Telangana",
-      performance: "96.0%",
-      type: "completed",
-      description: "Completed secondary education with comprehensive foundation in core subjects.",
-      highlights: [
-        "Excellent academic performance",
-        "Active participation in extracurricular activities"
-      ],
-      gradient: "from-green-500/20 to-emerald-500/20",
-      accentColor: "text-green-400"
-    }
-  ];
-
-  const EducationCard = ({ education, index, isLast }) => (
-    <div className="relative">
-      {/* Timeline Line */}
-      {!isLast && (
-        <div className="absolute left-8 top-20 w-0.5 h-full bg-gradient-to-b from-white/20 to-transparent lg:left-12"></div>
-      )}
-      
-      <div className={`flex gap-6 lg:gap-8 ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.2}s` }}>
-        {/* Timeline Icon */}
-        <div className="flex-shrink-0">
-          <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${education.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-white/20`}>
-            <GraduationCap size={24} className={education.accentColor} />
-          </div>
-          {education.type === 'current' && (
-            <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
-          )}
-        </div>
-        
-        {/* Content Card */}
-        <div className="flex-1">
-          <div className="glass-card hover-lift group">
-            {/* Header */}
-            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-4 mb-6">
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  {education.type === 'current' && (
-                    <div className="flex items-center gap-2 px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-medium">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                      Currently Studying
-                    </div>
-                  )}
-                </div>
-                
-                <h3 className="heading-sm text-white group-hover:text-blue-400 transition-colors duration-300">
-                  {education.institution}
-                </h3>
-                
-                <p className="body-md text-white/90 font-medium">
-                  {education.degree}
-                </p>
-                
-                <div className="flex flex-wrap gap-4 text-white/60">
-                  <div className="flex items-center gap-2">
-                    <Calendar size={16} />
-                    <span className="body-sm">{education.duration}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin size={16} />
-                    <span className="body-sm">{education.location}</span>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Performance Badge */}
-              <div className={`flex-shrink-0 p-4 rounded-xl bg-gradient-to-br ${education.gradient} text-center border border-white/20`}>
-                <div className="flex items-center gap-2 mb-1">
-                  <Award size={16} className={education.accentColor} />
-                  <span className="caption text-white/80">PERFORMANCE</span>
-                </div>
-                <div className="text-xl font-bold text-white">
-                  {education.performance}
-                </div>
-              </div>
-            </div>
-
-            {/* Description */}
-            <p className="body-sm text-white/80 leading-relaxed mb-6">
-              {education.description}
-            </p>
-
-            {/* Highlights */}
-            <div className="space-y-4">
-              <h4 className="body-sm font-semibold text-white flex items-center gap-2">
-                <Star size={16} className="text-yellow-400" />
-                Key Highlights
-              </h4>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {education.highlights.map((highlight, hlIndex) => (
-                  <div key={hlIndex} className="flex items-center gap-2 group/highlight">
-                    <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full group-hover/highlight:scale-125 transition-transform duration-300"></div>
-                    <span className="body-sm text-white/80 group-hover/highlight:text-white transition-colors duration-300">
-                      {highlight}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Progress Indicator for Current Education */}
-            {education.type === 'current' && (
-              <div className="mt-6 pt-6 border-t border-white/10 space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="caption text-white/60">DEGREE PROGRESS</span>
-                  <span className="caption text-white/60">Year 3 of 4</span>
-                </div>
-                <div className="progress-bar">
-                  <div 
-                    className="progress-fill"
-                    style={{ width: '75%' }}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
   return (
     <section 
       id="education" 
-      ref={sectionRef}
-      className="py-24 bg-gradient-to-br from-black to-gray-900/50 relative overflow-hidden"
+      className="py-24 bg-white dark:bg-zinc-950 border-b border-zinc-200/50 dark:border-zinc-800/50 transition-colors duration-300"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/3 left-1/6 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-      </div>
+      <div className="max-w-6xl mx-auto px-6">
+        
+        {/* Header */}
+        <div className="space-y-3 mb-16 text-left">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
+            Education Timeline
+          </h2>
+          <p className="text-zinc-500 dark:text-zinc-400 max-w-xl text-sm">
+            Degree pathways, academic benchmarks, and specialized coursework.
+          </p>
+        </div>
 
-      <div className="container relative z-10">
-        <div className="max-w-5xl mx-auto">
-          {/* Section Header */}
-          <div className={`text-center mb-16 ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}>
-            <p className="caption text-purple-400 mb-4 tracking-wider">
-              ACADEMIC BACKGROUND
-            </p>
-            <h2 className="heading-lg text-white mb-6">
-              Educational <span className="gradient-text">Journey</span>
-            </h2>
-            <p className="body-lg text-white/70 max-w-3xl mx-auto">
-              Building a strong foundation through rigorous academic pursuits and continuous learning
-            </p>
-          </div>
-
-          {/* Education Timeline */}
-          <div className="space-y-12">
-            {educationData.map((education, index) => (
-              <EducationCard 
-                key={index}
-                education={education}
-                index={index}
-                isLast={index === educationData.length - 1}
-              />
-            ))}
-          </div>
-
-          {/* Academic Stats */}
-          <div className={`mt-16 ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: '0.6s' }}>
-            <div className="glass-card bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 border-2 border-white/20">
-              <div className="text-center mb-8">
-                <h3 className="heading-sm text-white mb-2">Academic Excellence</h3>
-                <p className="body-sm text-white/70">Consistent performance and dedication to learning</p>
+        {/* Timeline Layout */}
+        <div className="space-y-12 max-w-4xl relative before:absolute before:inset-0 before:right-auto before:left-8 before:w-px before:bg-zinc-200 dark:before:bg-zinc-800">
+          {education.map((edu, index) => (
+            <div key={index} className="relative pl-16 group">
+              {/* Icon Marker */}
+              <div className="absolute left-4 top-0 -ml-4 w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 flex items-center justify-center group-hover:border-purple-500 dark:group-hover:border-purple-400 transition-colors duration-300">
+                <GraduationCap className="w-4 h-4 text-zinc-600 dark:text-zinc-400 group-hover:text-purple-600 dark:group-hover:text-purple-400" />
               </div>
-              
-              <div className="grid md:grid-cols-4 gap-8">
-                <div className="text-center space-y-2">
-                  <div className="text-3xl font-bold gradient-text">8.41</div>
-                  <div className="body-sm text-white/80">Current CGPA</div>
-                  <div className="caption text-white/60">Out of 10.0</div>
+
+              {/* Card */}
+              <div className="p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/10 shadow-sm hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-200">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">{edu.institution}</h3>
+                    <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">{edu.degree}</p>
+                    
+                    <div className="flex flex-wrap items-center gap-3 pt-1.5 text-xs text-zinc-400 dark:text-zinc-500">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5" />
+                        <span>{edu.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <MapPin className="w-3.5 h-3.5" />
+                        <span>{edu.location}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-bold self-start">
+                    <Award className="w-3.5 h-3.5" />
+                    <span>{edu.performance}</span>
+                  </div>
                 </div>
-                <div className="text-center space-y-2">
-                  <div className="text-3xl font-bold gradient-text">98.7%</div>
-                  <div className="body-sm text-white/80">12th Grade</div>
-                </div>
-                <div className="text-center space-y-2">
-                  <div className="text-3xl font-bold gradient-text">2027</div>
-                  <div className="body-sm text-white/80">Graduation Year</div>
-                  <div className="caption text-white/60">B. Tech CSE</div>
-                </div>
-                <div className="text-center space-y-2">
-                  <div className="text-3xl font-bold gradient-text">Top 5%</div>
-                  <div className="body-sm text-white/80">Class Rank</div>
-                  <div className="caption text-white/60">Academic Standing</div>
+
+                {/* Coursework tags */}
+                <div className="mt-4 pt-4 border-t border-zinc-200/60 dark:border-zinc-800/60 space-y-2">
+                  <span className="text-[10px] uppercase font-bold text-zinc-400 dark:text-zinc-500 tracking-wider flex items-center gap-1">
+                    <BookOpen className="w-3 h-3" />
+                    <span>Key Coursework</span>
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {edu.coursework.map((course, idx) => (
+                      <span 
+                        key={idx} 
+                        className="px-2.5 py-1 rounded-lg bg-zinc-200/50 dark:bg-zinc-850 text-zinc-600 dark:text-zinc-400 text-[10px] font-semibold"
+                      >
+                        {course}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
+
       </div>
     </section>
   );

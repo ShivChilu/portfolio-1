@@ -11,67 +11,25 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [isDark, setIsDark] = useState(() => {
-    // Check localStorage first, then system preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      return savedTheme === 'dark';
-    }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
+  const [isDark] = useState(false);
 
   useEffect(() => {
-    // Update CSS custom properties based on theme
     const root = document.documentElement;
-    
-    if (isDark) {
-      // Dark theme colors
-      root.style.setProperty('--bg-primary', '#0f0f11');
-      root.style.setProperty('--bg-secondary', '#1a1a1d');
-      root.style.setProperty('--bg-tertiary', '#252528');
-      root.style.setProperty('--bg-glass', 'rgba(255, 255, 255, 0.05)');
-      root.style.setProperty('--bg-card', 'rgba(255, 255, 255, 0.03)');
-      
-      root.style.setProperty('--text-primary', '#ffffff');
-      root.style.setProperty('--text-secondary', '#a1a1aa');
-      root.style.setProperty('--text-muted', '#71717a');
-      
-      root.style.setProperty('--border-color', 'rgba(255, 255, 255, 0.1)');
-      root.style.setProperty('--border-hover', 'rgba(255, 255, 255, 0.2)');
-      
-      document.body.classList.add('dark');
-      document.body.classList.remove('light');
-    } else {
-      // Light theme colors - Enhanced for better visibility
-      root.style.setProperty('--bg-primary', '#ffffff');
-      root.style.setProperty('--bg-secondary', '#f8fafc');
-      root.style.setProperty('--bg-tertiary', '#e2e8f0');
-      root.style.setProperty('--bg-glass', 'rgba(0, 0, 0, 0.08)');
-      root.style.setProperty('--bg-card', 'rgba(0, 0, 0, 0.05)');
-      
-      root.style.setProperty('--text-primary', '#0f172a');
-      root.style.setProperty('--text-secondary', '#334155');
-      root.style.setProperty('--text-muted', '#64748b');
-      
-      root.style.setProperty('--border-color', 'rgba(0, 0, 0, 0.15)');
-      root.style.setProperty('--border-hover', 'rgba(0, 0, 0, 0.25)');
-      
-      document.body.classList.add('light');
-      document.body.classList.remove('dark');
-    }
-
-    // Save theme preference
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  }, [isDark]);
+    root.classList.add('light');
+    root.classList.remove('dark');
+    document.body.classList.add('light');
+    document.body.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+  }, []);
 
   const toggleTheme = () => {
-    setIsDark(prev => !prev);
+    // No-op
   };
 
   const value = {
-    isDark,
+    isDark: false,
     toggleTheme,
-    theme: isDark ? 'dark' : 'light'
+    theme: 'light'
   };
 
   return (

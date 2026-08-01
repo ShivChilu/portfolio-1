@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import { ArrowUp, Mail, Linkedin, Github, MapPin, Code } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
+import React, { useState, useEffect } from 'react';
+import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
+import { personalInfo } from '../data/portfolioData';
 
 const Footer = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const { isDark } = useTheme();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 300);
+      setShowScrollTop(window.scrollY > 400);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -18,186 +17,59 @@ const Footer = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const currentYear = new Date().getFullYear();
-
-  const quickLinks = [
-    { label: 'About', section: 'about' },
-    { label: 'Experience', section: 'education' },
-    { label: 'Skills', section: 'skills' },
-    { label: 'Projects', section: 'projects' },
-    { label: 'Contact', section: 'contact' }
-  ];
-
-  const socialLinks = [
-    {
-      icon: <Mail size={20} />,
-      href: 'mailto:chiluverushivaprasad02@gmail.com',
-      label: 'Email',
-      gradient: 'from-blue-500 to-cyan-500'
-    },
-    {
-      icon: <Linkedin size={20} />,
-      href: 'https://www.linkedin.com/in/shiva01/',
-      label: 'LinkedIn',
-      gradient: 'from-blue-600 to-blue-400'
-    },
-    {
-      icon: <Github size={20} />,
-      href: 'https://github.com/ShivChilu/',
-      label: 'GitHub',
-      gradient: 'from-gray-600 to-gray-400'
-    }
-  ];
-
   return (
-    <footer className={`relative border-t overflow-hidden ${isDark ? 'bg-gradient-to-br from-black to-gray-900/50' : 'bg-gradient-to-br from-gray-50 to-white'}`} style={{ borderColor: 'var(--border-color)' }}>
-      {/* Background Pattern */}
-      <div className="absolute inset-0">
-        <div className={`absolute top-0 left-1/4 w-64 h-64 ${isDark ? 'bg-blue-500/5' : 'bg-blue-500/10'} rounded-full blur-3xl`}></div>
-        <div className={`absolute bottom-0 right-1/4 w-96 h-96 ${isDark ? 'bg-purple-500/5' : 'bg-purple-500/10'} rounded-full blur-3xl`}></div>
-      </div>
+    <footer className="py-12 bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-200/50 dark:border-zinc-800/50 transition-colors duration-300 relative">
+      <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        
+        {/* Left Side: Copyright */}
+        <div className="text-zinc-500 dark:text-zinc-400 text-xs text-center md:text-left leading-relaxed">
+          <p>© {new Date().getFullYear()} {personalInfo.name}. All rights reserved.</p>
+          <p className="mt-1 text-[10px] text-zinc-400">Handcrafted in Hyderabad, India.</p>
+        </div>
 
-      <div className="container relative z-10">
-        {/* Back to Top Button */}
-        {showScrollTop && (
-          <div className="flex justify-center py-8">
-            <button
-              onClick={scrollToTop}
-              className="group p-4 bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-filter backdrop-blur-md rounded-2xl border hover:scale-110 transition-all duration-300"
-              style={{ borderColor: 'var(--border-color)' }}
+        {/* Right Side: Social & Back to Top */}
+        <div className="flex items-center gap-6">
+          <div className="flex gap-4">
+            <a 
+              href={personalInfo.github} 
+              target="_blank" 
+              rel="noreferrer" 
+              className="text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
+              aria-label="GitHub Profile"
             >
-              <ArrowUp size={24} className="group-hover:text-blue-400 transition-colors duration-300" style={{ color: 'var(--text-primary)' }} />
-            </button>
+              <Github className="w-4.5 h-4.5" />
+            </a>
+            <a 
+              href={personalInfo.linkedin} 
+              target="_blank" 
+              rel="noreferrer" 
+              className="text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
+              aria-label="LinkedIn Profile"
+            >
+              <Linkedin className="w-4.5 h-4.5" />
+            </a>
+            <a 
+              href={`mailto:${personalInfo.email}`} 
+              className="text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
+              aria-label="Send Email"
+            >
+              <Mail className="w-4.5 h-4.5" />
+            </a>
           </div>
-        )}
 
-        {/* Main Footer Content */}
-        <div className="py-16">
-          <div className="grid lg:grid-cols-4 gap-12">
-            {/* Brand Section */}
-            <div className="lg:col-span-2 space-y-6">
-              <div className="space-y-4">
-                <h3 className="heading-md gradient-text">Shiva Prasad</h3>
-                <p className="body-lg font-medium" style={{ color: 'var(--text-primary)' }}>
-                  Computer Science Student & Aspiring Software Engineer
-                </p>
-                <p className="body-md leading-relaxed max-w-md" style={{ color: 'var(--text-secondary)' }}>
-                  Passionate about building scalable solutions, solving complex problems, 
-                  and creating meaningful impact through technology. Always learning, always growing.
-                </p>
-              </div>
-
-              {/* Personal Motto */}
-              <div className="glass-card max-w-md bg-gradient-to-r from-blue-500/10 to-purple-500/10 border" style={{ borderColor: 'var(--border-color)' }}>
-                <div className="flex items-center gap-3">
-                  <Code size={20} className="text-blue-400" />
-                  <p className="body-sm italic" style={{ color: 'var(--text-secondary)' }}>
-                    "Code with purpose, learn with passion, build with impact."
-                  </p>
-                </div>
-              </div>
-
-              {/* Current Status */}
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 px-4 py-2 bg-green-500/20 text-green-400 rounded-full border border-green-400/30">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="caption font-medium">Available for Summer 2026 Internships</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Quick Links */}
-            <div className="space-y-6">
-              <h4 className="heading-sm">Quick Links</h4>
-              <div className="space-y-3">
-                {quickLinks.map((link, index) => (
-                  <button
-                    key={index}
-                    onClick={() => scrollToSection(link.section)}
-                    className="block text-left w-full px-3 py-2 rounded-lg transition-all duration-300 body-sm hover:bg-white/5"
-                    style={{ color: 'var(--text-secondary)' }}
-                  >
-                    {link.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Contact & Social */}
-            <div className="space-y-6">
-              <h4 className="heading-sm">Get In Touch</h4>
-              
-              {/* Contact Info */}
-              <div className="space-y-3" style={{ color: 'var(--text-secondary)' }}>
-                <div className="flex items-center gap-3">
-                  <Mail size={16} className="text-blue-400" />
-                  <span className="body-sm">chiluverushivaprasad02@gmail.com</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin size={16} className="text-purple-400" />
-                  <span className="body-sm">Hyderabad, Telangana, India</span>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className="space-y-3">
-                <p className="body-sm font-medium" style={{ color: 'var(--text-primary)' }}>Follow Me</p>
-                <div className="flex gap-3">
-                  {socialLinks.map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 rounded-xl border hover:scale-110 transition-all duration-300 group"
-                      style={{ 
-                        backgroundColor: 'var(--bg-glass)', 
-                        borderColor: 'var(--border-color)',
-                        color: 'var(--text-primary)'
-                      }}
-                      title={social.label}
-                    >
-                      <span className="group-hover:text-blue-400 transition-colors duration-300">
-                        {social.icon}
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="py-8 border-t" style={{ borderColor: 'var(--border-color)' }}>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            {/* Copyright */}
-            <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
-              <span className="body-sm">© {currentYear} Shiva Prasad. All rights reserved.</span>
-            </div>
-
-            {/* Built With */}
-            <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
-              <span className="body-sm">Built using React, Tailwind CSS & modern web technologies</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Floating Action Button for Mobile */}
-        <div className="fixed bottom-6 right-6 md:hidden z-50">
+          {/* Floating or inline back to top */}
           {showScrollTop && (
             <button
               onClick={scrollToTop}
-              className="p-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
+              className="p-2.5 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-100 hover:scale-105 active:scale-95 transition-all duration-200 shadow-sm"
+              title="Back to Top"
+              aria-label="Back to Top"
             >
-              <ArrowUp size={20} className="text-white" />
+              <ArrowUp className="w-4 h-4" />
             </button>
           )}
         </div>
+
       </div>
     </footer>
   );

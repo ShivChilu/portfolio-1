@@ -1,27 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Menu, X, Sun, Moon, Play, ArrowUpRight, Monitor } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { personalInfo } from '../data/portfolioData';
 
-const Header = () => {
+const Header = ({ startTour }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState('home');
   const { isDark, toggleTheme } = useTheme();
+  const menuRef = useRef(null);
+  const triggerRef = useRef(null);
+
+  const navItems = [
+    { label: 'Home', section: 'home' },
+    { label: 'About', section: 'about' },
+    { label: 'Skills', section: 'skills' },
+    { label: 'Projects', section: 'projects' },
+    { label: 'Experience', section: 'internship' },
+    { label: 'Education', section: 'education' },
+    { label: 'Certifications', section: 'certifications' },
+    { label: 'Contact', section: 'contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
       
       // Determine active section based on scroll position
-      const sections = ['hero', 'about', 'education', 'skills', 'projects', 'resume', 'contact'];
-      const scrollPosition = window.scrollY + 100; // Offset for better detection
+      const scrollPosition = window.scrollY + 180; // Offset for better detection
       
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
+      for (const item of navItems) {
+        const element = document.getElementById(item.section);
         if (element) {
           const { offsetTop, offsetHeight } = element;
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(sectionId);
+            setActiveSection(item.section);
             break;
           }
         }
@@ -32,115 +45,69 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isMenuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        triggerRef.current &&
+        !triggerRef.current.contains(event.target)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isMenuOpen]);
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
-    element?.scrollIntoView({ behavior: 'smooth' });
+    if (element) {
+      const offset = 80; // Adjust for sticky header height
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
     setIsMenuOpen(false);
   };
-
-  const navItems = [
-    { label: 'About', section: 'about' },
-    { label: 'Education', section: 'education' },
-    { label: 'Skills', section: 'skills' },
-    { label: 'Projects', section: 'projects' },
-    { label: 'Resume', section: 'resume' },
-    { label: 'Contact', section: 'contact' }
-  ];
 
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'backdrop-blur-md bg-black/30 border-b border-white/10 shadow-lg' 
-          : 'bg-transparent'
+          ? 'bg-white/70 dark:bg-zinc-950/70 backdrop-blur-xl border-b border-zinc-200/50 dark:border-zinc-800/50 shadow-sm' 
+          : 'bg-transparent border-b border-transparent'
       }`}
     >
-      <div className="container">
-        <nav className="flex justify-between items-center py-5">{/* Increased padding */}
-          {/* Logo */}
-          <div 
-            className="text-2xl font-bold cursor-pointer hover:text-blue-400 transition-colors duration-300 font-['Space_Grotesk']"
-            onClick={() => scrollToSection('hero')}
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <div 
+          className="text-lg font-bold tracking-tight cursor-pointer font-sans flex items-center gap-2 group text-zinc-900 dark:text-zinc-50"
+          onClick={() => scrollToSection('home')}
+        >
+          <span className="w-2.5 h-2.5 rounded-full bg-red-600 dark:bg-red-500 group-hover:scale-125 transition-transform duration-300"></span>
+          <span className="font-semibold">{personalInfo.name}</span>
+        </div>
+
+        {/* Minimal Actions (Right) */}
+        <div className="flex items-center gap-4">
+          {/* Resume */}
+          <a
+            href={personalInfo.resumeUrl}
+            className="flex items-center gap-1 text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white text-xs font-semibold transition-colors duration-200"
           >
-            <span className="gradient-text">Shiva Prasad</span>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2">
-            {navItems.map((item, index) => (
-              <button
-                key={item.section}
-                onClick={() => scrollToSection(item.section)}
-                className={`relative px-4 py-2 rounded-lg transition-all duration-300 font-medium ${
-                  activeSection === item.section
-                    ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white border border-blue-400/30'
-                    : 'text-white/70 hover:text-white hover:bg-white/5'
-                }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {item.label}
-                {activeSection === item.section && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500"></span>
-                )}
-              </button>
-            ))}
-            
-            {/* Theme Toggle */}
-            <button 
-              onClick={toggleTheme}
-              className="theme-toggle group ml-2"
-              aria-label="Toggle theme"
-            >
-              {isDark ? (
-                <Sun size={20} className="group-hover:rotate-12 transition-transform duration-300" />
-              ) : (
-                <Moon size={20} className="group-hover:-rotate-12 transition-transform duration-300" />
-              )}
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-300"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </nav>
-
-        {/* Mobile Navigation */}
-        <div className={`md:hidden transition-all duration-300 overflow-hidden ${
-          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}>
-          <div className="py-4 space-y-2 bg-black/20 backdrop-blur-md rounded-lg border border-white/10 mt-2 mx-4">
-            {navItems.map((item, index) => (
-              <button
-                key={item.section}
-                onClick={() => scrollToSection(item.section)}
-                className={`block w-full text-left px-4 py-3 transition-all duration-300 text-sm ${
-                  activeSection === item.section
-                    ? 'bg-blue-500/20 text-white border-l-4 border-blue-400'
-                    : 'text-white/70 hover:text-white hover:bg-white/5'
-                }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {item.label}
-              </button>
-            ))}
-            <div className="px-4 pt-4 flex justify-center">
-              <button 
-                onClick={toggleTheme}
-                className="theme-toggle group"
-                aria-label="Toggle theme"
-              >
-                {isDark ? (
-                  <Sun size={20} className="group-hover:rotate-12 transition-transform duration-300" />
-                ) : (
-                  <Moon size={20} className="group-hover:-rotate-12 transition-transform duration-300" />
-                )}
-              </button>
-            </div>
-          </div>
+            <span>Resume</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
         </div>
       </div>
     </header>

@@ -1,194 +1,124 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Code2, Target, Users, Lightbulb, Rocket, Heart } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
+import React from 'react';
+import { personalInfo, summary } from '../data/portfolioData';
+import { Sparkles, Terminal, Code, Cpu } from 'lucide-react';
 
 const AboutSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-  const { isDark } = useTheme();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const highlights = [
-    {
-      icon: <Code2 size={28} />,
-      title: "Full-Stack Development",
-      description: "Experienced in building scalable web applications using modern technologies like React, Node.js, and MongoDB with a focus on clean architecture.",
-      color: "from-blue-500/20 to-cyan-500/20",
-      iconColor: "text-blue-400"
-    },
-    {
-      icon: <Target size={28} />,
-      title: "Problem Solving",
-      description: "Solved 150+ algorithmic problems on LeetCode with focus on time and space complexity optimization. Love tackling complex challenges.",
-      color: "from-purple-500/20 to-pink-500/20",
-      iconColor: "text-purple-400"
-    },
-    {
-      icon: <Users size={28} />,
-      title: "Team Leadership",
-      description: "Led development teams and collaborated on version control using GitHub in project-based environments with agile methodologies.",
-      color: "from-green-500/20 to-emerald-500/20",
-      iconColor: "text-green-400"
-    },
-    {
-      icon: <Lightbulb size={28} />,
-      title: "Innovation Mindset",
-      description: "Always exploring new technologies and approaches to create efficient, user-centered solutions that make a real difference.",
-      color: "from-yellow-500/20 to-orange-500/20",
-      iconColor: "text-yellow-400"
-    }
+  const diffIcons = [
+    <Sparkles className="w-5 h-5 text-amber-500" />,
+    <Terminal className="w-5 h-5 text-blue-500" />,
+    <Code className="w-5 h-5 text-purple-500" />
   ];
 
-  const personalTraits = [
-    { trait: "Passionate", icon: <Heart size={16} />, color: "text-red-400" },
-    { trait: "Innovative", icon: <Lightbulb size={16} />, color: "text-yellow-400" },
-    { trait: "Collaborative", icon: <Users size={16} />, color: "text-blue-400" },
-    { trait: "Driven", icon: <Rocket size={16} />, color: "text-purple-400" }
+  const milestones = [
+    {
+      year: "2023",
+      title: "Started B.Tech CSE at LPU",
+      description: "Began deep dive into computer science fundamentals, data structures, and software engineering methodologies."
+    },
+    {
+      year: "2024",
+      title: "Full-Stack Development Focus",
+      description: "Mastered frontend and backend Web technologies. Built regional scaling software for farmer communities."
+    },
+    {
+      year: "2025",
+      title: "AI Integration & Cloud Study",
+      description: "Completed Cloud Computing certifications and built predictive AI Travel Packing assistants using REST APIs."
+    },
+    {
+      year: "2026-2027",
+      title: "Next Horizon",
+      description: "Seeking a Summer 2026 software engineering internship to contribute to global SaaS and infrastructure projects."
+    }
   ];
 
   return (
     <section 
       id="about" 
-      ref={sectionRef}
-      className={`py-24 relative overflow-hidden ${isDark ? 'bg-gradient-to-br from-gray-900/50 to-black/50' : 'bg-gradient-to-br from-gray-50 to-white'}`}
+      className="py-24 bg-white dark:bg-zinc-950 border-b border-zinc-200/50 dark:border-zinc-800/50 transition-colors duration-300"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-pattern opacity-50"></div>
-      
-      <div className="container relative z-10">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <div className={`text-center mb-16 ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`}>
-            <p className="caption text-blue-400 mb-4 tracking-wider">
-              GET TO KNOW ME
+      <div className="max-w-6xl mx-auto px-6">
+        
+        {/* Header */}
+        <div className="space-y-3 mb-16 text-left">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
+            About Me & Journey
+          </h2>
+          <p className="text-zinc-500 dark:text-zinc-400 max-w-xl text-sm">
+            Bridging the gap between scalable engineering and gorgeous interfaces.
+          </p>
+        </div>
+
+        {/* Narrative Grid - 2 Column Layout */}
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          
+          {/* Column 1: Story Panel */}
+          <div className="lg:col-span-7 space-y-6">
+            <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-50 flex items-center gap-2">
+              <Cpu className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+              <span>Story</span>
+            </h3>
+            
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              {summary.long}
             </p>
-            <h2 className="heading-lg mb-6">
-              About <span className="gradient-text">Me</span>
-            </h2>
-            <p className="body-lg max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
-              A passionate developer with a vision to build tomorrow's digital solutions
+
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              {summary.objective}
             </p>
-          </div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            {/* Left: Personal Story */}
-            <div className={`space-y-8 ${isVisible ? 'animate-fadeInLeft' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
-              <div className="glass-card space-y-6">
-                <h3 className="heading-sm">My Journey</h3>
-                
-                <div className="space-y-4" style={{ color: 'var(--text-secondary)' }}>
-                  <p className="body-md leading-relaxed">
-                    I'm a <span className="text-blue-400 font-semibold">Computer Science student</span> graduating in 2027, 
-                    with hands-on experience in scalable full-stack development and 
-                    object-oriented programming using Java, C++, Python, and JavaScript.
-                  </p>
-                  
-{/*                   <p className="body-md leading-relaxed">
-                    Currently seeking a <span className="text-purple-400 font-semibold">Summer 2026 Software Engineering Internship</span> 
-                    to contribute to impactful, high-performance systems and grow through global team collaboration and mentorship.
-                  </p> */}
-                  
-                  <p className="body-md leading-relaxed">
-                    I thrive on solving complex problems and building user-centered applications that make a 
-                    <span className="text-green-400 font-semibold"> real difference</span> in people's lives.
-                  </p>
-                </div>
-
-                {/* Personal Traits */}
-                <div className="flex flex-wrap gap-3 pt-4">
-                  {personalTraits.map((item, index) => (
-                    <div 
-                      key={index}
-                      className="flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 hover:scale-105"
-                      style={{ 
-                        backgroundColor: 'var(--bg-glass)', 
-                        borderColor: 'var(--border-color)',
-                        color: 'var(--text-primary)'
-                      }}
-                    >
-                      <span className={item.color}>{item.icon}</span>
-                      <span className="text-sm font-medium">{item.trait}</span>
+            {/* What makes me different */}
+            <div className="pt-4 space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-450">
+                What Makes Me Different
+              </h4>
+              <div className="space-y-3">
+                {summary.difference.map((item, idx) => (
+                  <div 
+                    key={idx}
+                    className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/30 flex gap-3 items-start"
+                  >
+                    <div className="p-1 bg-zinc-100 dark:bg-zinc-800 rounded-lg shrink-0 mt-0.5">
+                      {diffIcons[idx % diffIcons.length]}
                     </div>
-                  ))}
-                </div>
-
-                <button className="btn-primary group">
-                  Let's Connect
-                  <Users size={16} className="group-hover:scale-110 transition-transform duration-300" />
-                </button>
-              </div>
-            </div>
-
-            {/* Right: Highlights Grid */}
-            <div className={`space-y-6 ${isVisible ? 'animate-fadeInRight' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
-              {highlights.map((highlight, index) => (
-                <div 
-                  key={index}
-                  className="glass-card hover-lift group cursor-pointer"
-                  style={{ animationDelay: `${0.6 + index * 0.1}s` }}
-                >
-                  <div className="flex gap-6">
-                    <div className={`flex-shrink-0 p-4 rounded-xl bg-gradient-to-br ${highlight.color} ${highlight.iconColor} group-hover:scale-110 transition-transform duration-300`}>
-                      {highlight.icon}
-                    </div>
-                    
-                    <div className="flex-1 space-y-3">
-                      <h4 className="heading-sm group-hover:text-blue-400 transition-colors duration-300">
-                        {highlight.title}
-                      </h4>
-                      <p className="body-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                        {highlight.description}
-                      </p>
+                    <div>
+                      <h5 className="font-bold text-zinc-900 dark:text-zinc-150 text-xs">{item.title}</h5>
+                      <p className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-0.5 leading-relaxed">{item.description}</p>
                     </div>
                   </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Column 2: Timeline Panel */}
+          <div className="lg:col-span-5 space-y-6">
+            <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-50">
+              Journey
+            </h3>
+            
+            <div className="relative border-l border-zinc-200 dark:border-zinc-800 pl-6 ml-2 space-y-6">
+              {milestones.map((milestone, idx) => (
+                <div key={idx} className="relative group">
+                  {/* Indicator Dot */}
+                  <span className="absolute -left-[31px] top-1.5 w-2.5 h-2.5 rounded-full bg-zinc-300 dark:bg-zinc-800 group-hover:bg-purple-500 dark:group-hover:bg-purple-400 transition-colors duration-300" />
+                  
+                  <span className="text-[9px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-widest">
+                    {milestone.year}
+                  </span>
+                  <h4 className="font-bold text-xs text-zinc-900 dark:text-zinc-100 mt-0.5">
+                    {milestone.title}
+                  </h4>
+                  <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed">
+                    {milestone.description}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Bottom CTA Section */}
-          <div className={`mt-16 text-center ${isVisible ? 'animate-fadeInUp' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
-            <div className="glass-card max-w-4xl mx-auto bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 border-2" style={{ borderColor: 'var(--border-hover)' }}>
-              <div className="space-y-6">
-                <h3 className="heading-sm">Ready to Build Something Amazing?</h3>
-                <p className="body-md max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
-                  I'm always excited to discuss new opportunities, innovative projects, or just chat about the latest in tech. 
-                  Let's create something extraordinary together!
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button 
-                    className="btn-primary"
-                    onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                  >
-                    View My Projects
-                  </button>
-                  <button 
-                    className="btn-secondary"
-                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  >
-                    Get In Touch
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
+
       </div>
     </section>
   );

@@ -1,40 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import LoadingScreen from './LoadingScreen';
-import ParticlesBackground from './ParticlesBackground';
-import FloatingButtons from './FloatingButtons';
 import Header from './Header';
 import HeroSection from './HeroSection';
-import AboutSection from './AboutSection';
-import EducationSection from './EducationSection';
 import SkillsSection from './SkillsSection';
 import ProjectsSection from './ProjectsSection';
-import AchievementsSection from './AchievementsSection';
-import TrainingSection from './TrainingSection';
-import ResumeSection from './ResumeSection';
+import InternshipSection from './InternshipSection';
+import EducationSection from './EducationSection';
+import CertificationsSection from './CertificationsSection';
 import ContactSection from './ContactSection';
 import Footer from './Footer';
+import CustomCursor from './CustomCursor';
+import WebsiteTour from './WebsiteTour';
+import FloatingDock from './FloatingDock';
+import { useTheme } from '../contexts/ThemeContext';
+import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 
 const Portfolio = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [showContent, setShowContent] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeTourStep, setActiveTourStep] = useState(0);
+  const [isTourActive, setIsTourActive] = useState(false);
+  const { toggleTheme } = useTheme();
 
-  useEffect(() => {
-    // Check if user has already seen the loading screen in this session
-    const hasSeenLoading = sessionStorage.getItem('hasSeenLoading');
-    console.log('Has seen loading:', hasSeenLoading);
-    
-    if (hasSeenLoading === 'true') {
-      // Skip loading screen if already seen in this session
-      console.log('Skipping loading screen');
-      setIsLoading(false);
-      setShowContent(true);
-    } else {
-      console.log('Showing loading screen');
-    }
-    // If hasSeenLoading is not 'true', keep isLoading as true (default state)
-  }, []);
-
+  // Scroll Progress logic
   useEffect(() => {
     const handleScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -46,49 +32,71 @@ const Portfolio = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleLoadingComplete = () => {
-    console.log('Loading complete, setting session storage');
-    sessionStorage.setItem('hasSeenLoading', 'true');
-    setIsLoading(false);
-    setTimeout(() => {
-      setShowContent(true);
-      console.log('Content visible');
-    }, 100);
+  // Auto-start Website Tour on first visit
+  useEffect(() => {
+    const hasCompletedTour = localStorage.getItem('hasCompletedTour');
+    if (hasCompletedTour !== 'true') {
+      setIsTourActive(true);
+    }
+  }, []);
+
+  // Keyboard Shortcuts Hook integration
+  useKeyboardShortcuts({
+    onToggleTheme: toggleTheme,
+    onFocusSearch: () => {
+      // Focus skills search input
+      const searchInput = document.querySelector('#skills input');
+      searchInput?.focus();
+    }
+  });
+
+  const handleStartTour = () => {
+    setActiveTourStep(0);
+    setIsTourActive(true);
   };
 
   return (
-    <div className="portfolio-container">
-      {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
+    <div className="relative min-h-screen bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300 selection:bg-purple-500/20">
       
+      {/* Custom Cursor (Subtle, desktop only) */}
+      <CustomCursor />
+
+      {/* Website Tour Guide Overlay */}
+      <WebsiteTour 
+        activeTourStep={activeTourStep}
+        setActiveTourStep={setActiveTourStep}
+        isTourActive={isTourActive}
+        setIsTourActive={setIsTourActive}
+      />
+
+      {/* macOS Style Navigation Floating Dock */}
+      <FloatingDock startTour={handleStartTour} />
+
       {/* Scroll Progress Bar */}
-      {showContent && (
-        <div className="fixed top-0 left-0 right-0 z-[60] h-1 bg-gray-800/20">
-          <div 
-            className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 transition-all duration-150 ease-out"
-            style={{ width: `${scrollProgress}%` }}
-          ></div>
-        </div>
-      )}
-      
-      {showContent && (
-        <>
-          <ParticlesBackground />
-          <FloatingButtons />
-          <Header />
-          <main className="pt-0 relative z-10">
-            <HeroSection />
-            <AboutSection />
-            <EducationSection />
-            <SkillsSection />
-            <ProjectsSection />
-            <AchievementsSection />
-            <TrainingSection />
-            <ResumeSection />
-            <ContactSection />
-          </main>
-          <Footer />
-        </>
-      )}
+      <div className="fixed top-0 left-0 right-0 z-[60] h-0.5 bg-zinc-200 dark:bg-zinc-800/30">
+        <div 
+          className="h-full bg-gradient-to-r from-blue-500 via-purple-600 to-indigo-600 transition-all duration-100 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
+      {/* Header */}
+      <Header startTour={handleStartTour} />
+
+      {/* Main Sections */}
+      <main className="relative">
+        <HeroSection />
+        <EducationSection />
+        <SkillsSection />
+        <InternshipSection />
+        <ProjectsSection />
+        <CertificationsSection />
+        <ContactSection />
+      </main>
+
+      {/* Footer */}
+      <Footer />
+
     </div>
   );
 };
