@@ -132,6 +132,7 @@ const ContactIcon = () => (
 
 const FloatingDock = ({ startTour }) => {
   const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const dockItems = [
     {
@@ -139,13 +140,6 @@ const FloatingDock = ({ startTour }) => {
       label: "Resume",
       action: () => {
         window.open(personalInfo.resumeUrl, "_blank");
-      }
-    },
-    {
-      icon: <RobotIcon />,
-      label: "Take Tour",
-      action: () => {
-        if (startTour) startTour();
       }
     },
     {
@@ -190,37 +184,50 @@ const FloatingDock = ({ startTour }) => {
 
   return (
     <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99] flex items-center justify-center pointer-events-none">
-      <div 
-        className="flex items-end gap-3 px-4 py-3 rounded-[1.75rem] border border-zinc-250/50 dark:border-zinc-800/50 bg-white/70 dark:bg-zinc-900/40 backdrop-blur-2xl shadow-xl pointer-events-auto transition-all duration-300"
-        onMouseLeave={() => setHoveredIdx(null)}
-      >
-        {dockItems.map((item, idx) => {
-          let scaleClass = "scale-100";
-          if (hoveredIdx === idx) {
-            scaleClass = "scale-[1.28] -translate-y-2.5";
-          } else if (hoveredIdx !== null && Math.abs(hoveredIdx - idx) === 1) {
-            scaleClass = "scale-[1.12] -translate-y-1";
-          }
+      {isCollapsed ? (
+        <button
+          onClick={() => setIsCollapsed(false)}
+          className="w-6 h-6 rounded-full bg-red-600 dark:bg-red-500 border border-white/20 dark:border-zinc-800/50 shadow-xl pointer-events-auto hover:scale-125 transition-all duration-300 animate-pulse flex items-center justify-center cursor-pointer group"
+          title="Click to expand dock menu"
+          aria-label="Expand menu"
+        >
+          <span className="w-2.5 h-2.5 rounded-full bg-white opacity-85 group-hover:scale-110 transition-transform"></span>
+        </button>
+      ) : (
+        <div 
+          onDoubleClick={() => setIsCollapsed(true)}
+          title="Double-click to collapse"
+          className="flex items-end gap-3 px-4 py-3 rounded-[1.75rem] border border-red-500/30 bg-red-600/90 dark:bg-red-700/80 backdrop-blur-2xl shadow-xl pointer-events-auto transition-all duration-300 select-none cursor-pointer"
+          onMouseLeave={() => setHoveredIdx(null)}
+        >
+          {dockItems.map((item, idx) => {
+            let scaleClass = "scale-100";
+            if (hoveredIdx === idx) {
+              scaleClass = "scale-[1.28] -translate-y-2.5";
+            } else if (hoveredIdx !== null && Math.abs(hoveredIdx - idx) === 1) {
+              scaleClass = "scale-[1.12] -translate-y-1";
+            }
 
-          return (
-            <button
-              key={idx}
-              onClick={item.action}
-              onMouseEnter={() => setHoveredIdx(idx)}
-              className={`relative flex flex-col items-center justify-center p-1 rounded-2xl transition-all duration-200 cursor-pointer group origin-bottom ${scaleClass}`}
-              aria-label={item.label}
-            >
-              {/* Custom SVG Icon */}
-              {item.icon}
+            return (
+              <button
+                key={idx}
+                onClick={item.action}
+                onMouseEnter={() => setHoveredIdx(idx)}
+                className={`relative flex flex-col items-center justify-center p-1 rounded-2xl transition-all duration-200 cursor-pointer group origin-bottom ${scaleClass}`}
+                aria-label={item.label}
+              >
+                {/* Custom SVG Icon */}
+                {item.icon}
 
-              {/* Hover Tooltip label */}
-              <span className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-zinc-950 dark:bg-zinc-50 text-white dark:text-zinc-950 text-[10px] font-bold tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md">
-                {item.label}
-              </span>
-            </button>
-          );
-        })}
-      </div>
+                {/* Hover Tooltip label */}
+                <span className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-zinc-950 dark:bg-zinc-50 text-white dark:text-zinc-950 text-[10px] font-bold tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md">
+                  {item.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
