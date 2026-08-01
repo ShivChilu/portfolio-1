@@ -4,42 +4,37 @@ import { ChevronLeft, ChevronRight, X, Sparkles } from 'lucide-react';
 const TOUR_STEPS = [
   {
     targetId: 'home',
-    title: 'Hero Section',
+    title: 'Profile',
     description: 'Welcome! This is where you can view my professional introduction, primary tech stacks, and career trajectory.',
   },
   {
-    targetId: 'about',
-    title: 'About Me',
-    description: 'Learn about my journey, current focus, and what sets my engineering approach apart.',
+    targetId: 'education',
+    title: 'Education',
+    description: 'Explore my degree path, academic credentials, and timelines from school to university.',
   },
   {
     targetId: 'skills',
-    title: 'Interactive Skills Console',
-    description: 'Search or filter my technical competencies across categories like Frontend, Backend, Databases, and Concepts.',
-  },
-  {
-    targetId: 'projects',
-    title: 'Selected Projects',
-    description: 'Explore my production-ready developments, featuring interactive category filters, technologies used, and code logs.',
+    title: 'Skills',
+    description: 'Search or filter my technical competencies across categories like Frontend, Backend, Databases, and CS Fundamentals.',
   },
   {
     targetId: 'internship',
-    title: 'Professional Experience',
+    title: 'Experience',
     description: 'Check out my professional work history and previous internship timelines.',
   },
   {
-    targetId: 'education',
-    title: 'Academic Background',
-    description: 'My degree path, key coursework, and academic credentials at Lovely Professional University.',
+    targetId: 'projects',
+    title: 'Projects',
+    description: 'Explore my production-ready developments and access live deployments.',
   },
   {
     targetId: 'certifications',
-    title: 'Professional Certifications',
-    description: 'Industry credentials from organizations like NPTEL (IIT) and IBM.',
+    title: 'Certifications',
+    description: 'Industry credentials and certifications validating key technical domains.',
   },
   {
     targetId: 'contact',
-    title: 'Contact Form',
+    title: 'Contact',
     description: 'Have a project in mind or looking to hire? Drop a message here, or copy my email with a single click.',
   },
 ];
@@ -57,10 +52,10 @@ const WebsiteTour = ({ activeTourStep, setActiveTourStep, isTourActive, setIsTou
       element.scrollIntoView({ behavior: 'smooth', block: 'center' });
       
       // Temporarily add a highlight border/shadow effect
-      element.classList.add('ring-2', 'ring-purple-500/50', 'transition-all', 'duration-500');
+      element.classList.add('ring-2', 'ring-red-500/50', 'transition-all', 'duration-500');
       
       return () => {
-        element.classList.remove('ring-2', 'ring-purple-500/50');
+        element.classList.remove('ring-2', 'ring-red-500/50');
       };
     }
   }, [activeTourStep, isTourActive, currentStep]);
