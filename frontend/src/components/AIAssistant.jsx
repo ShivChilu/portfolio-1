@@ -49,7 +49,7 @@ If the user's message indicates they want to see, go to, open, download, call, o
 - To email Shiva: [COMMAND: EMAIL_SHIVA]
 - To call Shiva: [COMMAND: CALL_SHIVA]
 
-Keep your responses concise, highly professional, and welcoming to recruiters. Format your answers in markdown.
+Keep your responses extremely concise (under 2-3 sentences max), highly professional, and welcoming to recruiters. Focus on direct answers. Format your answers in markdown.
 `;
 
 const AIAssistant = () => {
@@ -269,7 +269,7 @@ const AIAssistant = () => {
           },
           generationConfig: {
             temperature: 0.1,
-            maxOutputTokens: 1024
+            maxOutputTokens: 350
           }
         })
       });
