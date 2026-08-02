@@ -18,6 +18,7 @@ const HeroSection = () => {
       
       const fullText = `${summary.long} ${summary.objective}`;
       const utterance = new SpeechSynthesisUtterance(fullText);
+      const voices = window.speechSynthesis.getVoices();
       const speakWithSelectedVoice = (availableVoices) => {
         const maleKeywords = ['male', 'david', 'mark', 'daniel', 'arthur', 'gordon', 'aaron', 'rishi', 'nicky', '#male', 'mzk', 'google us english', 'google uk english'];
         const femaleKeywords = ['female', 'samantha', 'zira', 'hazel', 'susan', 'karen', 'moira', 'tessa', 'veena', 'victoria', 'heather'];
