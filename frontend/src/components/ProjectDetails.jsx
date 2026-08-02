@@ -8,20 +8,9 @@ const ProjectDetails = () => {
   const navigate = useNavigate();
   const project = projectsData.find((p) => p.id === id);
 
-  const [currentImgIndex, setCurrentImgIndex] = React.useState(0);
-  const projectImages = project?.images || (project ? [project.image] : []);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    if (projectImages.length <= 1) return;
-    const interval = setInterval(() => {
-      setCurrentImgIndex((prev) => (prev + 1) % projectImages.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [projectImages.length]);
 
   if (!project) {
     return (
@@ -73,33 +62,12 @@ const ProjectDetails = () => {
         </div>
 
         {/* Image Display */}
-        <div className="aspect-[16/9] w-full rounded-3xl overflow-hidden border border-zinc-200 dark:border-zinc-800/80 shadow-md relative bg-zinc-900">
-          {projectImages.map((imgSrc, index) => (
-            <img 
-              key={index}
-              src={imgSrc} 
-              alt={`${project.title} screenshot ${index + 1}`} 
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                index === currentImgIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-              }`}
-            />
-          ))}
-          
-          {/* Indicator Dots */}
-          {projectImages.length > 1 && (
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-20 bg-black/30 backdrop-blur-md px-3 py-1.5 rounded-full">
-              {projectImages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImgIndex(index)}
-                  className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                    index === currentImgIndex ? 'bg-white w-3' : 'bg-white/50'
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
-          )}
+        <div className="aspect-[16/9] w-full rounded-3xl overflow-hidden border border-zinc-200 dark:border-zinc-800/80 shadow-md">
+          <img 
+            src={project.image} 
+            alt={project.title} 
+            className="w-full h-full object-cover"
+          />
         </div>
 
         {/* Core Layout Split */}

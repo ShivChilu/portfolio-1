@@ -49,7 +49,7 @@ If the user's message indicates they want to see, go to, open, download, call, o
 - To email Shiva: [COMMAND: EMAIL_SHIVA]
 - To call Shiva: [COMMAND: CALL_SHIVA]
 
-Keep your responses extremely concise (under 2-3 sentences max), highly professional, and welcoming to recruiters. Focus on direct answers. Format your answers in markdown.
+Keep your responses concise, highly professional, and welcoming to recruiters. Format your answers in markdown.
 `;
 
 const AIAssistant = () => {
@@ -250,7 +250,7 @@ const AIAssistant = () => {
       if (!key) {
         throw new Error('AI service API key is not configured in .env.local');
       }
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${key}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`;
       
       const contents = updatedMessages.map(msg => ({
         role: msg.sender === 'user' ? 'user' : 'model',
@@ -269,15 +269,13 @@ const AIAssistant = () => {
           },
           generationConfig: {
             temperature: 0.1,
-            maxOutputTokens: 350
+            maxOutputTokens: 1024
           }
         })
       });
 
       if (!response.ok) {
-        const errData = await response.json().catch(() => ({}));
-        console.error("Gemini Response Error:", errData);
-        throw new Error(errData.error?.message || `HTTP ${response.status}`);
+        throw new Error('Failed to generate response from Gemini API');
       }
 
       const data = await response.json();
@@ -287,8 +285,7 @@ const AIAssistant = () => {
       
       setMessages(prev => [...prev, { sender: 'ai', text: cleanText }]);
     } catch (err) {
-      console.error("Ask Shiva Chatbot Error:", err);
-      setErrors(`Error: ${err.message}`);
+      setErrors('Failed to communicate with AI Assistant. Please check your network.');
     } finally {
       setIsGenerating(false);
     }
@@ -307,31 +304,35 @@ const AIAssistant = () => {
   return (
     <>
       {/* Floating Chat Bubble Button */}
-      {(!isOpen || isMinimized) && (
-        <button
-          onClick={() => {
-            if (isOpen) {
-              handleClose();
-            } else {
-              setIsOpen(true);
-            }
-          }}
-          className="fixed bottom-28 right-4 md:bottom-6 md:right-6 z-[100] w-16 h-16 rounded-2xl bg-red-600 hover:bg-red-500 text-white flex flex-col items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer pointer-events-auto border border-red-500/20 p-2"
-          aria-label="Ask Shiva"
-        >
-          <AskShivaIcon className="animate-pulse" />
-          <span className="text-[8px] font-extrabold tracking-wider mt-1 uppercase select-none leading-none">Ask Shiva</span>
-        </button>
-      )}
+      <button
+        onClick={() => {
+          if (isOpen) {
+            handleClose();
+          } else {
+            setIsOpen(true);
+          }
+        }}
+        className="fixed bottom-28 right-4 md:bottom-6 md:right-6 z-[100] w-16 h-16 rounded-2xl bg-red-600 hover:bg-red-500 text-white flex flex-col items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer pointer-events-auto border border-red-500/20 p-2"
+        aria-label="Ask Shiva"
+      >
+        {isOpen && !isMinimized ? (
+          <X className="w-5 h-5" />
+        ) : (
+          <>
+            <AskShivaIcon className="animate-pulse" />
+            <span className="text-[8px] font-extrabold tracking-wider mt-1 uppercase select-none leading-none">Ask Shiva</span>
+          </>
+        )}
+      </button>
 
       {/* Chat Window Panel / Minimized Header */}
       {isOpen && (
         <div 
           style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
-          className={`fixed z-[100] bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl shadow-2xl flex flex-col overflow-hidden pointer-events-auto border border-zinc-200 dark:border-zinc-800 transition-all duration-300 ${
+          className={`fixed bottom-48 md:bottom-24 right-4 md:right-6 z-[100] bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl shadow-2xl flex flex-col overflow-hidden pointer-events-auto border border-zinc-200 dark:border-zinc-800 transition-all duration-300 ${
             isMinimized 
-              ? 'bottom-28 right-4 md:bottom-6 md:right-6 w-[200px] h-[44px] rounded-xl' 
-              : 'bottom-0 left-0 right-0 w-full h-[50vh] max-h-[400px] rounded-t-3xl rounded-b-none border-b-0 md:bottom-24 md:right-6 md:left-auto md:w-[380px] md:h-[520px] md:max-h-none md:rounded-2xl md:border-b'
+              ? 'w-[240px] h-[44px] rounded-xl' 
+              : 'w-[90vw] sm:w-[380px] h-[65vh] sm:h-[520px] max-h-[460px] sm:max-h-none rounded-2xl'
           }`}
         >
           {/* Header (Draggable) */}
