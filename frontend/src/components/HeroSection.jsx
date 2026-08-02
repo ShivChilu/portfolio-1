@@ -18,35 +18,44 @@ const HeroSection = () => {
       
       const fullText = `${summary.long} ${summary.objective}`;
       const utterance = new SpeechSynthesisUtterance(fullText);
-      const voices = window.speechSynthesis.getVoices();
-      
-      const maleKeywords = ['male', 'david', 'mark', 'daniel', 'arthur', 'gordon', 'aaron', 'rishi', 'nicky', '#male', 'mzk'];
-      const femaleKeywords = ['female', 'samantha', 'zira', 'hazel', 'susan', 'karen', 'moira', 'tessa', 'veena', 'victoria', 'heather'];
+      const speakWithSelectedVoice = (availableVoices) => {
+        const maleKeywords = ['male', 'david', 'mark', 'daniel', 'arthur', 'gordon', 'aaron', 'rishi', 'nicky', '#male', 'mzk', 'google us english', 'google uk english'];
+        const femaleKeywords = ['female', 'samantha', 'zira', 'hazel', 'susan', 'karen', 'moira', 'tessa', 'veena', 'victoria', 'heather'];
 
-      let maleVoice = voices.find(voice => {
-        const name = voice.name.toLowerCase();
-        return voice.lang.startsWith('en') && maleKeywords.some(kw => name.includes(kw));
-      });
-
-      if (!maleVoice) {
-        maleVoice = voices.find(voice => {
+        let maleVoice = availableVoices.find(voice => {
           const name = voice.name.toLowerCase();
-          return voice.lang.startsWith('en') && !femaleKeywords.some(kw => name.includes(kw));
+          return voice.lang.startsWith('en') && maleKeywords.some(kw => name.includes(kw));
         });
+
+        if (!maleVoice) {
+          maleVoice = availableVoices.find(voice => {
+            const name = voice.name.toLowerCase();
+            return voice.lang.startsWith('en') && !femaleKeywords.some(kw => name.includes(kw));
+          });
+        }
+
+        if (maleVoice) {
+          utterance.voice = maleVoice;
+        }
+        
+        utterance.pitch = 1.22; // Youthful boy-like pitch adjustment
+        utterance.rate = 1.05;  // Lighter, energetic reading speed
+
+        utterance.onend = () => setIsSpeaking(false);
+        utterance.onerror = () => setIsSpeaking(false);
+
+        setIsSpeaking(true);
+        window.speechSynthesis.speak(utterance);
+      };
+
+      if (voices.length === 0) {
+        window.speechSynthesis.onvoiceschanged = () => {
+          const reloadedVoices = window.speechSynthesis.getVoices();
+          speakWithSelectedVoice(reloadedVoices);
+        };
+      } else {
+        speakWithSelectedVoice(voices);
       }
-
-      if (maleVoice) {
-        utterance.voice = maleVoice;
-      }
-      
-      utterance.pitch = 1.22; // Youthful boy-like pitch adjustment
-      utterance.rate = 1.05;  // Lighter, energetic reading speed
-
-      utterance.onend = () => setIsSpeaking(false);
-      utterance.onerror = () => setIsSpeaking(false);
-
-      setIsSpeaking(true);
-      window.speechSynthesis.speak(utterance);
     }
   };
 
