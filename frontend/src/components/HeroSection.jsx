@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowDown, Code, ArrowUpRight, Github, Linkedin, Briefcase, Volume2, VolumeX } from 'lucide-react';
+import { ArrowDown, Code, ArrowUpRight, Github, Linkedin, Briefcase } from 'lucide-react';
 import { personalInfo, summary } from '../data/portfolioData';
 
 const HeroSection = () => {
@@ -10,62 +10,6 @@ const HeroSection = () => {
   const [typedObjective, setTypedObjective] = useState("");
   const [activeElement, setActiveElement] = useState("name");
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isSpeaking, setIsSpeaking] = useState(false);
-
-  const startSpeaking = () => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      
-      const fullText = `${summary.long} ${summary.objective}`;
-      const utterance = new SpeechSynthesisUtterance(fullText);
-      const voices = window.speechSynthesis.getVoices();
-      const speakWithSelectedVoice = (availableVoices) => {
-        const maleKeywords = ['male', 'david', 'mark', 'daniel', 'arthur', 'gordon', 'aaron', 'rishi', 'nicky', '#male', 'mzk', 'google us english', 'google uk english'];
-        const femaleKeywords = ['female', 'samantha', 'zira', 'hazel', 'susan', 'karen', 'moira', 'tessa', 'veena', 'victoria', 'heather'];
-
-        let maleVoice = availableVoices.find(voice => {
-          const name = voice.name.toLowerCase();
-          return voice.lang.startsWith('en') && maleKeywords.some(kw => name.includes(kw));
-        });
-
-        if (!maleVoice) {
-          maleVoice = availableVoices.find(voice => {
-            const name = voice.name.toLowerCase();
-            return voice.lang.startsWith('en') && !femaleKeywords.some(kw => name.includes(kw));
-          });
-        }
-
-        if (maleVoice) {
-          utterance.voice = maleVoice;
-        }
-        
-        utterance.pitch = 1.22; // Youthful boy-like pitch adjustment
-        utterance.rate = 1.05;  // Lighter, energetic reading speed
-
-        utterance.onend = () => setIsSpeaking(false);
-        utterance.onerror = () => setIsSpeaking(false);
-
-        setIsSpeaking(true);
-        window.speechSynthesis.speak(utterance);
-      };
-
-      if (voices.length === 0) {
-        window.speechSynthesis.onvoiceschanged = () => {
-          const reloadedVoices = window.speechSynthesis.getVoices();
-          speakWithSelectedVoice(reloadedVoices);
-        };
-      } else {
-        speakWithSelectedVoice(voices);
-      }
-    }
-  };
-
-  const stopSpeaking = () => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      setIsSpeaking(false);
-    }
-  };
 
   useEffect(() => {
     let nameText = personalInfo.name;
@@ -119,17 +63,8 @@ const HeroSection = () => {
 
     return () => {
       isCancelled = true;
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
     };
   }, []);
-
-  useEffect(() => {
-    if (activeElement === "long") {
-      startSpeaking();
-    }
-  }, [activeElement]);
 
   const getCursor = (elName) => {
     if (activeElement === elName) {
@@ -261,18 +196,7 @@ const HeroSection = () => {
           </div>
 
           {/* Introduction / Objective Paragraph */}
-          <div className="space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm sm:text-base min-h-[220px] relative">
-            {typedLong && (
-              <div className="absolute -top-1 right-0 z-20 flex gap-2">
-                <button 
-                  onClick={isSpeaking ? stopSpeaking : startSpeaking}
-                  className="p-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-905 dark:hover:bg-zinc-800 text-zinc-500 hover:text-zinc-850 dark:text-zinc-400 dark:hover:text-zinc-200 transition-colors flex items-center justify-center pointer-events-auto border border-zinc-200 dark:border-zinc-800 shadow-sm"
-                  title={isSpeaking ? "Mute introduction voice" : "Play introduction voice"}
-                >
-                  {isSpeaking ? <VolumeX className="w-3.5 h-3.5 text-red-500 animate-pulse" /> : <Volume2 className="w-3.5 h-3.5" />}
-                </button>
-              </div>
-            )}
+          <div className="space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm sm:text-base min-h-[220px]">
             {typedQuote && (
               <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 border-l-2 border-red-500 pl-3 italic">
                 {typedQuote}
