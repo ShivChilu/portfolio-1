@@ -275,7 +275,9 @@ const AIAssistant = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to generate response from Gemini API');
+        const errData = await response.json().catch(() => ({}));
+        console.error("Gemini Response Error:", errData);
+        throw new Error(errData.error?.message || `HTTP ${response.status}`);
       }
 
       const data = await response.json();
@@ -285,7 +287,8 @@ const AIAssistant = () => {
       
       setMessages(prev => [...prev, { sender: 'ai', text: cleanText }]);
     } catch (err) {
-      setErrors('Failed to communicate with AI Assistant. Please check your network.');
+      console.error("Ask Shiva Chatbot Error:", err);
+      setErrors(`Error: ${err.message}`);
     } finally {
       setIsGenerating(false);
     }
