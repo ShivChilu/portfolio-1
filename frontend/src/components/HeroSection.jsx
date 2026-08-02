@@ -20,17 +20,19 @@ const HeroSection = () => {
       const utterance = new SpeechSynthesisUtterance(fullText);
       const voices = window.speechSynthesis.getVoices();
       
-      let maleVoice = voices.find(voice => 
-        voice.lang.startsWith('en') && 
-        (voice.name.toLowerCase().includes('male') || 
-         voice.name.toLowerCase().includes('david') || 
-         voice.name.toLowerCase().includes('mark') || 
-         voice.name.toLowerCase().includes('google uk english male') || 
-         voice.name.toLowerCase().includes('microsoft david'))
-      );
+      const maleKeywords = ['male', 'david', 'mark', 'daniel', 'arthur', 'gordon', 'aaron', 'rishi', 'nicky', '#male', 'mzk'];
+      const femaleKeywords = ['female', 'samantha', 'zira', 'hazel', 'susan', 'karen', 'moira', 'tessa', 'veena', 'victoria', 'heather'];
+
+      let maleVoice = voices.find(voice => {
+        const name = voice.name.toLowerCase();
+        return voice.lang.startsWith('en') && maleKeywords.some(kw => name.includes(kw));
+      });
 
       if (!maleVoice) {
-        maleVoice = voices.find(voice => voice.lang.startsWith('en'));
+        maleVoice = voices.find(voice => {
+          const name = voice.name.toLowerCase();
+          return voice.lang.startsWith('en') && !femaleKeywords.some(kw => name.includes(kw));
+        });
       }
 
       if (maleVoice) {
