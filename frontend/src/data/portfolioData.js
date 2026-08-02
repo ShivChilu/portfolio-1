@@ -94,27 +94,27 @@ export const projectsData = [
     image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80"
   },
   {
-    id: "packsavy",
-    title: "PackSavy",
-    category: "AI Packing Assistant",
-    description: "Built a full-stack web application using React.js, Node.js, Express.js, REST APIs, and Tailwind CSS to generate personalized AI-powered travel packing recommendations.",
-    longDescription: "Integrated Google Gemini and Open Weather APIs with scalable backend services, optimized application performance, and converted UI/UX wireframes into responsive, mobile-first user interfaces. Collaborated on application architecture, debugged issues, implemented clean and maintainable code, and used Git and GitHub for version control throughout development.",
-    technologies: ["React.js", "Node.js", "Express.js", "Gemini AI", "Tailwind CSS", "OpenWeather API"],
+    id: "fresh-meat-hub",
+    title: "Fresh Meat Hub",
+    category: "Full Stack E-Commerce",
+    description: "Engineered a full-stack MERN e-commerce platform using a high-performance Node.js and Express.js backend architecture.",
+    longDescription: "Engineered a full-stack MERN e-commerce platform using a high-performance Node.js and Express.js backend architecture. Integrated robust schema validations and real-time database aggregation pipelines in MongoDB to manage product catalogs, client orders, and financial analytics. Developed a responsive React frontend utilizing Tailwind CSS and modular state management, implementing location-restricted checkout validation and base64 image file encoding. Optimized system reliability using structured file logging, custom request loggers, and graceful connection shutdown processes. The project demonstrates clean RESTful API design, scalable database modeling, and production-ready software engineering standards designed for high-availability applications.",
+    technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "REST APIs"],
     keyFeatures: [
-      "Generates personalized AI travel packing lists using Google Gemini integration",
-      "Integrates live weather forecasting using OpenWeather API integration",
-      "Responsive mobile-first user interfaces converted from wireframe designs",
-      "Version control and collaborative codebase management using Git and GitHub"
+      "Real-time database aggregation pipelines in MongoDB for catalog & analytics management",
+      "Responsive React client with location-restricted checkout validation",
+      "Robust base64 image file encoding and schema validations",
+      "Structured request loggers and graceful server connection shutdown processes"
     ],
     stats: {
-      architecture: "AI Integration",
-      reliability: "Mobile First UI",
-      database: "Gemini / Weather"
+      backend: "Node.js & Express",
+      database: "MongoDB Pipeline",
+      reliability: "Connection Shutdown"
     },
-    demoUrl: "https://github.com/ShivChilu/portfolio-1",
-    githubUrl: "https://github.com/ShivChilu/portfolio-1",
+    demoUrl: "https://fresh-meat-hub-2.onrender.com",
+    githubUrl: "https://github.com/ShivChilu/fresh-meat-hub",
     caseStudyUrl: "#",
-    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
