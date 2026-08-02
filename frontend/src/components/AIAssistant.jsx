@@ -250,7 +250,7 @@ const AIAssistant = () => {
       if (!key) {
         throw new Error('AI service API key is not configured in .env.local');
       }
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${key}`;
       
       const contents = updatedMessages.map(msg => ({
         role: msg.sender === 'user' ? 'user' : 'model',
