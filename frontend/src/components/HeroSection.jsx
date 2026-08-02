@@ -288,7 +288,7 @@ const HeroSection = () => {
       </div>
 
       {/* Animated Scroll Indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-zinc-400 dark:text-zinc-500 pointer-events-none">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1.5 text-zinc-400 dark:text-zinc-500 pointer-events-none">
         <span className="text-[9px] uppercase tracking-widest font-semibold">Scroll</span>
         <div className="w-5 h-8 rounded-full border-2 border-zinc-300 dark:border-zinc-800 flex justify-center p-1">
           <div className="w-1 h-2 rounded-full bg-zinc-400 dark:bg-zinc-600 animate-bounce" />

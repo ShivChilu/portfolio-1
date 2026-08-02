@@ -10,6 +10,7 @@ export const personalInfo = {
   email: "shivaprasad0914@gmail.com",
   linkedin: "https://www.linkedin.com/in/shiva01/",
   github: "https://github.com/ShivChilu/",
+  profileImage: "/profile_nobg.png",
   resumeUrl: "/resume.pdf", // Add CV/Resume Link here
   graduationYear: "2027",
   cgpa: "8.25",

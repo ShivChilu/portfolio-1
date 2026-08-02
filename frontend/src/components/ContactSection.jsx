@@ -37,7 +37,7 @@ const ContactSection = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) {
@@ -48,12 +48,36 @@ const ContactSection = () => {
     setErrors({});
     setIsSubmitting(true);
 
-    // Mock Express.js post endpoint simulation
-    setTimeout(() => {
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/chiluverushivaprasad02@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: "New Portfolio Contact Message",
+          _captcha: "false",
+          _template: "table",
+          _autoresponse: "Thank you for reaching out! I have received your message and will get back to you as soon as possible.",
+          _next: window.location.href
+        })
+      });
+
+      if (response.ok) {
+        setIsSubmitting(false);
+        showNotification('Message sent successfully!');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (error) {
       setIsSubmitting(false);
-      showNotification('Message sent successfully! (Simulated)');
-      setFormData({ name: '', email: '', message: '' });
-    }, 1200);
+      showNotification('Failed to send message. Please try again.');
+    }
   };
 
   return (

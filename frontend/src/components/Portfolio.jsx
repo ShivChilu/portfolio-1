@@ -10,6 +10,7 @@ import ContactSection from './ContactSection';
 import Footer from './Footer';
 import WebsiteTour from './WebsiteTour';
 import FloatingDock from './FloatingDock';
+import AIAssistant from './AIAssistant';
 import { useTheme } from '../contexts/ThemeContext';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 
@@ -68,6 +69,9 @@ const Portfolio = () => {
 
       {/* macOS Style Navigation Floating Dock */}
       <FloatingDock startTour={handleStartTour} />
+
+      {/* AI Recruiter Assistant Sparkles Interface */}
+      <AIAssistant />
 
       {/* Scroll Progress Bar */}
       <div className="fixed top-0 left-0 right-0 z-[60] h-0.5 bg-zinc-200 dark:bg-zinc-800/30">
