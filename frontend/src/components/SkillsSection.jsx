@@ -100,13 +100,13 @@ const SkillsSection = () => {
             {filteredSkills.map((skill, index) => (
               <div 
                 key={index}
-                className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/50 shadow-sm hover:shadow-md hover:border-red-500/20 dark:hover:border-red-500/20 transition-all duration-200 flex items-center justify-between group"
+                className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/50 shadow-sm hover:shadow-md hover:border-red-500/20 dark:hover:border-red-500/20 transition-all duration-200 flex flex-col items-start justify-between gap-2 group min-h-[92px]"
               >
-                <span className="font-semibold text-sm text-zinc-850 dark:text-zinc-200 group-hover:text-zinc-950 dark:group-hover:text-zinc-50 transition-colors">
-                  {skill.name}
-                </span>
                 <span className="text-[9px] uppercase font-bold text-red-600 dark:text-red-400 tracking-wider">
                   {skill.category}
+                </span>
+                <span className="font-semibold text-sm text-zinc-850 dark:text-zinc-200 group-hover:text-zinc-950 dark:group-hover:text-zinc-50 transition-colors leading-tight">
+                  {skill.name}
                 </span>
               </div>
             ))}
