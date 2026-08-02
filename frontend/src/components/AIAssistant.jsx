@@ -250,7 +250,7 @@ const AIAssistant = () => {
       if (!key) {
         throw new Error('AI service API key is not configured in .env.local');
       }
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`;
       
       const contents = updatedMessages.map(msg => ({
         role: msg.sender === 'user' ? 'user' : 'model',
@@ -275,7 +275,9 @@ const AIAssistant = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to generate response from Gemini API');
+        const errorData = await response.json().catch(() => ({}));
+        console.error('Gemini API Error details:', errorData);
+        throw new Error(errorData.error?.message || 'Failed to generate response from Gemini API');
       }
 
       const data = await response.json();
@@ -285,7 +287,8 @@ const AIAssistant = () => {
       
       setMessages(prev => [...prev, { sender: 'ai', text: cleanText }]);
     } catch (err) {
-      setErrors('Failed to communicate with AI Assistant. Please check your network.');
+      console.error('AI Assistant Error:', err);
+      setErrors(err.message || 'Failed to communicate with AI Assistant. Please check your network.');
     } finally {
       setIsGenerating(false);
     }
