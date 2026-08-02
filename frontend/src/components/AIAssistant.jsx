@@ -3,22 +3,21 @@ import { MessageSquare, Send, X, Sparkles, Download, ExternalLink, Mail, Phone, 
 import { personalInfo, summary, skillsData, projectsData, internships, certifications, education } from '../data/portfolioData';
 
 const AskShivaIcon = ({ className }) => (
-  <svg className={`w-6 h-6 transition-transform duration-350 ${className || ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg className={`w-5 h-5 transition-transform duration-350 ${className || ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path 
-      d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 13.9021 3.59048 15.6676 4.59972 17.1245L3.5 20.5L6.8755 19.4003C8.33235 20.4095 10.0979 21 12 21Z" 
+      d="M21 11.5C21 16.1944 16.9706 20 12 20C10.4907 20 9.07684 19.6457 7.83842 19.0205L3.5 20.5L4.85586 16.6261C3.69348 15.1952 3 13.4272 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z" 
       stroke="currentColor" 
       strokeWidth={1.8} 
       strokeLinecap="round" 
       strokeLinejoin="round"
     />
     <path 
-      d="M9 10C9.5 8.5 11 8 12.5 8.5C14 9 14.5 10.5 13.5 11.5C12.5 12.5 10 12.5 9 13.5C8 14.5 9 16 11 16C12.5 16 14.5 15 15 13.5" 
+      d="M12 7V16M8.5 11.5H15.5" 
       stroke="currentColor" 
       strokeWidth={1.8} 
       strokeLinecap="round" 
-      strokeLinejoin="round"
     />
-    <circle cx="12" cy="12.2" r="1.2" fill="currentColor" />
+    <circle cx="12" cy="11.5" r="2.5" fill="none" stroke="currentColor" strokeWidth={1.5} />
   </svg>
 );
 
@@ -313,20 +312,27 @@ const AIAssistant = () => {
             setIsOpen(true);
           }
         }}
-        className="fixed bottom-6 right-6 z-[100] w-12 h-12 rounded-full bg-red-600 hover:bg-red-500 text-white flex items-center justify-center shadow-xl hover:scale-115 active:scale-95 transition-all cursor-pointer pointer-events-auto border border-red-500/20"
+        className="fixed bottom-28 right-4 md:bottom-6 md:right-6 z-[100] w-16 h-16 rounded-2xl bg-red-600 hover:bg-red-500 text-white flex flex-col items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer pointer-events-auto border border-red-500/20 p-2"
         aria-label="Ask Shiva"
       >
-        {isOpen && !isMinimized ? <X className="w-5 h-5" /> : <AskShivaIcon className="animate-pulse" />}
+        {isOpen && !isMinimized ? (
+          <X className="w-5 h-5" />
+        ) : (
+          <>
+            <AskShivaIcon className="animate-pulse" />
+            <span className="text-[8px] font-extrabold tracking-wider mt-1 uppercase select-none leading-none">Ask Shiva</span>
+          </>
+        )}
       </button>
 
       {/* Chat Window Panel / Minimized Header */}
       {isOpen && (
         <div 
           style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
-          className={`fixed bottom-20 right-6 z-[100] bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl shadow-2xl flex flex-col overflow-hidden pointer-events-auto border border-zinc-200 dark:border-zinc-800 transition-all duration-300 ${
+          className={`fixed bottom-48 md:bottom-24 right-4 md:right-6 z-[100] bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl shadow-2xl flex flex-col overflow-hidden pointer-events-auto border border-zinc-200 dark:border-zinc-800 transition-all duration-300 ${
             isMinimized 
               ? 'w-[240px] h-[44px] rounded-xl' 
-              : 'w-[380px] h-[520px] max-w-[calc(100vw-2rem)] rounded-2xl'
+              : 'w-[90vw] sm:w-[380px] h-[65vh] sm:h-[520px] max-h-[460px] sm:max-h-none rounded-2xl'
           }`}
         >
           {/* Header (Draggable) */}
