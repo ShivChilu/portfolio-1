@@ -91,7 +91,8 @@ export const projectsData = [
     demoUrl: "https://investraiq-1.onrender.com",
     githubUrl: "https://github.com/ShivChilu/InvestraIQ",
     caseStudyUrl: "#",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80"
+    image: "/investra_1.png",
+    images: ["/investra_1.png", "/investra_2.png", "/investra_3.png", "/investra_4.png"]
   },
   {
     id: "fresh-meat-hub",
