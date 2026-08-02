@@ -37,8 +37,8 @@ const HeroSection = () => {
         utterance.voice = maleVoice;
       }
       
-      utterance.pitch = 0.88; // Masculine pitch adjustment
-      utterance.rate = 0.95;  // Highly professional reading speed
+      utterance.pitch = 1.22; // Youthful boy-like pitch adjustment
+      utterance.rate = 1.05;  // Lighter, energetic reading speed
 
       utterance.onend = () => setIsSpeaking(false);
       utterance.onerror = () => setIsSpeaking(false);
